@@ -1,4 +1,8 @@
 
+# If there is an existing bashrc on the computer, then run it before running this bashrc
+if [ -f ~/comprc_old/.bashrc ];then
+	    source ~/comprc_old/.bashrc
+fi
 
 echo "██████╗  █████╗  ██████╗██╗  ██╗██████╗  ██████╗ ███████╗██████╗ "
 echo "██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔═══██╗██╔════╝██╔══██╗"
@@ -58,7 +62,3 @@ alias e_vimrc="vim $HOME/.vimrc"
 alias email="open https://www.gmail.com"
 
 
-# If the shell is interactive and .bashrc exists, get the aliases and functions
-if [ -f ~/comprc_old/.bashrc ];then
-	    source ~/comprc_old/.bashrc
-fi
