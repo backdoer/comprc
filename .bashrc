@@ -57,3 +57,8 @@ alias e_vimrc="vim $HOME/.vimrc"
 ##EMAIL
 alias email="open https://www.gmail.com"
 
+
+# If the shell is interactive and .bashrc exists, get the aliases and functions
+if [ -f ~/comprc_old/.bashrc ];then
+	    source ~/comprc_old/.bashrc
+fi
