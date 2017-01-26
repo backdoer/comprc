@@ -35,5 +35,12 @@ done
 echo "Installing Vundle"
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+# Install the rest of the plugins
 echo "Installing All Vim Plugins"
 vim +PluginInstall +qall
+
+# Clear the screen
+clear
+
+# Source the bashrc
+source .bashrc
