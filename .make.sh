@@ -29,3 +29,11 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/.$file ~/.$file
 done
+
+
+# Install Vundle for managing Vim plugins
+echo "Installing Vundle"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+echo "Installing All Vim Plugins"
+vim +PluginInstall +qall
