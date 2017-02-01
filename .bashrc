@@ -24,6 +24,7 @@ gall(){
 	git push origin master
 }
 
+# Commits all changes in comrc directory and pushes to master
 gcomprc(){
 	cwd=$(pwd)
 	cd ~/comprc
