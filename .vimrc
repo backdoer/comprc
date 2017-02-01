@@ -6,7 +6,6 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
@@ -19,14 +18,16 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/surround.vim'
+Plugin 'ap/vim-buftabline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Allow multiple buffers to be open at once
+set hidden
 
-
-" Automatically start NERDTree on open
+" "Automatically start NERDTree on open
 " autocmd VimEnter * NERDTree
 
 " Pushing 't' will toggle NERDTree
@@ -38,7 +39,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " Highlight Current Line
 :set cursorline
-
+		
 " Syntax Coloring
 " :set spell
 " :set spl=en
