@@ -16,6 +16,19 @@ echo "                                                                 "
 alias e_bashrc="vim $HOME/.bashrc"
 alias s_bashrc="source $HOME/.bashrc"
 
+
+##TMUX
+alias e_tmux="vim $HOME/.tmux.conf"
+alias s_tmux="tmux source-file $HOME/.tmux.conf"
+alias ksesh_tmux="tmux kill-session -t"
+alias sesh_tmux="tmux list-sessions"
+alias ntmux="tmux new-session -s"
+alias osesh_tmux="tmux attach -t"
+
+#VIM
+alias e_vimrc="vim $HOME/.vimrc"
+
+
 #GIT COMMANDS
 alias gpom="git push origin master"
 gall(){
@@ -36,17 +49,6 @@ pcomprc(){
 	cd ~/comprc
 	git pull origin master
 	cd $cwd
+	s_bashrc
+	s_tmux
 }
-
-##TMUX
-alias e_tmux="vim $HOME/.tmux.conf"
-alias s_tmux="tmux source-file $HOME/.tmux.conf"
-alias ksesh_tmux="tmux kill-session -t"
-alias sesh_tmux="tmux list-sessions"
-alias ntmux="tmux new-session -s"
-alias osesh_tmux="tmux attach -t"
-
-#VIM
-alias e_vimrc="vim $HOME/.vimrc"
-
-
