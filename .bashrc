@@ -24,6 +24,12 @@ gall(){
 	git push origin master
 }
 
+gcomprc(){
+	cwd=$(pwd)
+	cd ~/comprc
+	$(gall "$1")
+	cd $cwd	
+}
 
 ##TMUX
 alias e_tmux="vim $HOME/.tmux.conf"
