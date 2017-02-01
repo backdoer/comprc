@@ -31,6 +31,12 @@ gcomprc(){
 	$(gall "$1")
 	cd $cwd	
 }
+pcomprc(){
+	cwd=$(pwd)
+	cd ~/comprc
+	git pull origin master
+	cd $cwd
+}
 
 ##TMUX
 alias e_tmux="vim $HOME/.tmux.conf"
