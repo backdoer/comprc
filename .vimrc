@@ -27,6 +27,9 @@ filetype plugin indent on    " required
 " Allow multiple buffers to be open at once
 set hidden
 
+" set line numbers
+set number
+
 " "Automatically start NERDTree on open
 " autocmd VimEnter * NERDTree
 
