@@ -52,7 +52,7 @@ pcomprc(){
 	s_bashrc
 	s_tmux
 }
-source $HOME/.git-prompt.sh
+source $HOME/comprc/.git-prompt.sh
 # For git bash prompts
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
@@ -60,3 +60,7 @@ GIT_PS1_SHOWUNTRACKEDFILES=1
 
 export PS1='\[\e[1;32m\]\u\[\e[0m\]@\[\e[1;34m\]\h\[\e[0m\]:\[\e[1;36m\]\w\[\e[0m\]$(__git_ps1 "(%s)")\$ '
 
+if [[ ! -f /tmp/.id_added ]];then
+	 ssh-add -K ~/.ssh/id_rsa
+	  touch /tmp/.id_added
+fi
