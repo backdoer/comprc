@@ -1,4 +1,4 @@
-
+9
 # If there is an existing bashrc on the computer, then run it before running this bashrc
 if [ -f ~/comprc_old/.bashrc ];then
 	    source ~/comprc_old/.bashrc
@@ -64,3 +64,14 @@ if [[ ! -f /tmp/.id_added ]];then
 	 ssh-add -K ~/.ssh/id_rsa
 	  touch /tmp/.id_added
 fi
+
+#Terminal Design
+#export PS1='\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]$(__git_ps1 "(%s)"\$'
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+# Directory listing aliases
+alias ls='ls -GFh'
+alias ll='ls -l'
+alias la='ls -a'
+
