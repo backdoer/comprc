@@ -1,4 +1,3 @@
-9
 # If there is an existing bashrc on the computer, then run it before running this bashrc
 if [ -f ~/comprc_old/.bashrc ];then
 	    source ~/comprc_old/.bashrc
@@ -34,7 +33,7 @@ alias gpom="git push origin master"
 gall(){
 	git add .
 	git commit -m "$1"
-	git push origin master
+	git push
 }
 
 # Commits all changes in comrc directory and pushes to master
@@ -58,7 +57,7 @@ GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 
-export PS1='\[\e[1;32m\]\u\[\e[0m\]@\[\e[1;34m\]\h\[\e[0m\]:\[\e[1;36m\]\w\[\e[0m\]$(__git_ps1 "(%s)")\$ '
+#export PS1='\[\e[1;32m\]\u\[\e[0m\]@\[\e[1;34m\]\h\[\e[0m\]:\[\e[1;36m\]\w\[\e[0m\]$(__git_ps1 "(%s)")\$ '
 
 if [[ ! -f /tmp/.id_added ]];then
 	 ssh-add -K ~/.ssh/id_rsa
@@ -75,3 +74,6 @@ alias ls='ls -GFh'
 alias ll='ls -l'
 alias la='ls -a'
 
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
