@@ -22,7 +22,7 @@ alias s_tmux="tmux source-file $HOME/.tmux.conf"
 alias ksesh_tmux="tmux kill-session -t"
 alias sesh_tmux="tmux list-sessions"
 alias ntmux="tmux new-session -s"
-alias osesh_tmux="tmux attach -t"
+alias asesh_tmux="tmux attach -t"
 
 #VIM
 alias e_vimrc="vim $HOME/.vimrc"
