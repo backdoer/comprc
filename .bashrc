@@ -1,4 +1,4 @@
-# If there is an existing bashrc on the computer, then run it before running this bashrc
+## If there is an existing bashrc on the computer, then run it before running this bashrc
 if [ -f ~/comprc_old/.bashrc ];then
 	    source ~/comprc_old/.bashrc
 fi
@@ -10,13 +10,13 @@ echo "██╔══██╗██╔══██║██║     ██╔═
 echo "██████╔╝██║  ██║╚██████╗██║  ██╗██████╔╝╚██████╔╝███████╗██║  ██║"
 echo "╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝"
 echo "                                                                 "
-
-#.BASHRC COMMANDS
+#
+##.BASHRC COMMANDS
 alias e_bashrc="vim $HOME/.bashrc"
 alias s_bashrc="source $HOME/.bashrc"
-
-
-##TMUX
+#
+#
+###TMUX
 alias e_tmux="vim $HOME/.tmux.conf"
 alias s_tmux="tmux source-file $HOME/.tmux.conf"
 alias ksesh_tmux="tmux kill-session -t"
@@ -81,4 +81,4 @@ alias la='ls -a'
 
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+#export PATH="$PATH:$HOME/.rvm/bin"
