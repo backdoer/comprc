@@ -14,8 +14,12 @@ echo "                                                                 "
 ##.BASHRC COMMANDS
 alias e_bashrc="vim $HOME/.bashrc"
 alias s_bashrc="source $HOME/.bashrc"
-#
-#
+
+# Atom
+alias save_atom="apm list --installed --bare > ~/comprc/.atom-packages.list"
+alias install_atom="apm install --packages-file ~/comprc/.atom-packages.list"
+
+
 ###TMUX
 alias e_tmux="vim $HOME/.tmux.conf"
 alias s_tmux="tmux source-file $HOME/.tmux.conf"
