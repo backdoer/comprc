@@ -1,7 +1,7 @@
 ## If there is an existing bashrc on the computer, then run it before running this bashrc
-if [ -f ~/comprc_old/.bashrc ];then
-	    source ~/comprc_old/.bashrc
-fi
+# if [ -f ~/comprc_old/.bashrc ];then
+# 	    source ~/comprc_old/.bashrc
+# fi
 
 echo "██████╗  █████╗  ██████╗██╗  ██╗██████╗  ██████╗ ███████╗██████╗ "
 echo "██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔═══██╗██╔════╝██╔══██╗"
@@ -47,7 +47,7 @@ gcomprc(){
 	cwd=$(pwd)
 	cd ~/comprc
 	$(gall "$1")
-	cd $cwd	
+	cd $cwd
 }
 pcomprc(){
 	cwd=$(pwd)
@@ -87,4 +87,4 @@ alias la='ls -a'
 
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-#export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/.rvm/bin"

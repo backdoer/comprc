@@ -34,7 +34,7 @@ set number
 " autocmd VimEnter * NERDTree
 
 " Pushing 't' will toggle NERDTree
-:map t :NERDTreeToggle <CR> 
+:map t :NERDTreeToggle <CR>
 
 " Close NERDTree if only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -42,7 +42,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " Highlight Current Line
 " :set cursorline
-		
+
 " Syntax Coloring
 " :set spell
 " :set spl=en
