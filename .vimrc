@@ -41,7 +41,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 
 " Highlight Current Line
-:set cursorline
+" :set cursorline
 		
 " Syntax Coloring
 " :set spell
@@ -53,4 +53,3 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 if has("autocmd")
    autocmd bufwritepost .vimrc source $MYVIMRC
 endif
-
