@@ -49,6 +49,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 :syntax on
 :colorscheme desert
 
+" enable mouse
+:set mouse=a
+
+au InsertEnter * silent execute "!echo -en \<esc>[5 q"
+au InsertLeave * silent execute "!echo -en \<esc>[2 q"
+
 " Source the vimrc file after saving it
 if has("autocmd")
    autocmd bufwritepost .vimrc source $MYVIMRC
