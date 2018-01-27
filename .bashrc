@@ -29,7 +29,7 @@ alias ntmux="tmux new-session -s"
 alias asesh_tmux="tmux attach -t"
 
 #Default Editor
-export EDITOR="atom"
+export EDITOR="code"
 
 #VIM
 alias e_vimrc="vim $HOME/.vimrc"
