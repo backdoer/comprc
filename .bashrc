@@ -30,7 +30,7 @@ alias ntmux="tmux new-session -s"
 alias asesh_tmux="tmux attach -t"
 
 #Default Editor
-export EDITOR="code"
+export EDITOR="vim"
 
 #VIM
 alias e_vimrc="vim $HOME/.vimrc"
