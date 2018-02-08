@@ -25,14 +25,20 @@ Plug 'eugen0329/vim-esearch'
 Plug 'elixir-editors/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-gitgutter'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 call plug#end()
 
 " Allow multiple buffers to be open at once
 set hidden
+
+" Display ignored files in NERDTree
+let NERDTreeShowHidden=1
 
 "Use system clipboard
 :set clipboard=unnamed
@@ -42,6 +48,9 @@ set backspace=2 " make backspace work like most other programs
 
 " Allow incremental search
 set incsearch
+
+" Auto-reload changed files
+set autoread
 
 " set line numbers
 set number
@@ -67,12 +76,13 @@ map <C-p> :LeaderfFile<CR>
 " :set spell
 " :set spl=en
 :syntax on
-:colorscheme desert
+:colorscheme onedark
 
 " Buffers
 set hidden
-nnoremap <C-]> :bnext<CR>
-nnoremap <C-[> :bprev<CR>
+map <C-w>] :bnext<CR>
+map <C-w>[ :bprev<CR>
+map <C-w>x :bd<CR>
 
 " enable mouse
 :set mouse=a
@@ -84,3 +94,14 @@ au InsertLeave * silent execute "!echo -en \<esc>[2 q"
 if has("autocmd")
    autocmd bufwritepost .vimrc source $MYVIMRC
 endif
+
+" Tab filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=2
+" when indenting with '>', use 4 spaces width
+set shiftwidth=2
+" On pressing tab, insert 4 spaces
+set expandtab
+
+" Disable .swp files
+:set noswapfile

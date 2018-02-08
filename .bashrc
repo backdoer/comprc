@@ -36,11 +36,22 @@ export EDITOR="vim"
 alias e_vimrc="vim $HOME/.vimrc"
 
 #GIT COMMANDS
-alias gpom="git push origin master"
+alias gp="git push"
+alias gb="git branch"
+
+gco(){
+  git checkout $1
+}
+gn(){
+  git checkout -b $1
+}
 gall(){
 	git add .
 	git commit -m "$1"
 	git push
+}
+gd(){
+  git branch -d $1
 }
 
 # Commits all changes in comrc directory and pushes to master
