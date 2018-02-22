@@ -14,10 +14,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'itchyny/lightline.vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+"Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
+"Plug 'garbas/vim-snipmate'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+"Plug 'Valloric/YouCompleteMe'
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neosnippet.vim'
 Plug 'vim-scripts/surround.vim'
 Plug 'ap/vim-buftabline'
 Plug 'Yggdroot/LeaderF'
@@ -105,3 +109,15 @@ set expandtab
 
 " Disable .swp files
 :set noswapfile
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/my-snippets/UltiSnips']
+
+let g:neocomplete#enable_at_startup = 1
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
