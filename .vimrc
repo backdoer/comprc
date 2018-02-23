@@ -52,9 +52,9 @@ set incsearch " Allow incremental search
 set autoread " Auto-reload changed files
 set number " set line numbers
 set hidden " allow multiple buffers
-set tabstop=2 " show existing tab with 2 spaces width
+"set tabstop=2 " show existing tab with 2 spaces width
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
-set expandtab " On pressing tab, insert 2 spaces
+"set expandtab " On pressing tab, insert 2 spaces
 set noswapfile " Disable .swp files
 set mouse=a " enable mouse
 
@@ -68,7 +68,10 @@ function! TrimWhiteSpace()
 endfunction
 autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
 autocmd VimEnter * NERDTree " Automatically start NERDTree on open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Automatically close vim if NERDTree is only buffer left
+autocmd bufenter * if (winnr("$") == 1
+  \ && exists("b:NERDTree")
+  \ && b:NERDTree.isTabTree())
+  \ | q | endif " Automatically close vim if NERDTree is only buffer left
 autocmd bufwritepost .vimrc source $MYVIMRC " Source the vimrc file after saving it
 
 " Mappings
