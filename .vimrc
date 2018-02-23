@@ -1,123 +1,107 @@
+
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'itchyny/lightline.vim'
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-"Plug 'garbas/vim-snipmate'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-"Plug 'Valloric/YouCompleteMe'
-Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'vim-scripts/surround.vim'
-Plug 'ap/vim-buftabline'
-Plug 'Yggdroot/LeaderF'
-Plug 'eugen0329/vim-esearch'
-Plug 'elixir-editors/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'rafi/awesome-vim-colorschemes'
-Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'scrooloose/nerdtree' " Directory structure
+Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
+Plug 'itchyny/lightline.vim' " File info at bottom of vim
+Plug 'SirVer/ultisnips' " Snippet Engine
+Plug 'honza/vim-snippets' " Group of snippets
+"Plug 'Shougo/neocomplete.vim' " Neocomplete
+"Plug 'Shougo/neosnippet.vim'
+Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
+Plug 'elixir-editors/vim-elixir' " Elixir support for vim
+Plug 'slashmili/alchemist.vim' " Elixir support for vim
+Plug 'scrooloose/nerdcommenter' " Comment support
+Plug 'pangloss/vim-javascript' " Javascript support for vim
+Plug 'mxw/vim-jsx' " Jsx support for vim
+Plug 'mattn/emmet-vim' " Html expansion
+Plug 'tpope/vim-fugitive' " Vim git integration
+Plug 'airblade/vim-gitgutter' " Vim gutter integration
+Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
+Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
+Plug 'junegunn/fzf.vim' " Vim plugin for fzf
 call plug#end()
 
-" Allow multiple buffers to be open at once
-set hidden
-
-" Display ignored files in NERDTree
-let NERDTreeShowHidden=1
-
-"Use system clipboard
-:set clipboard=unnamed
-
-"Backspace
-set backspace=2 " make backspace work like most other programs
-
-" Allow incremental search
-set incsearch
-
-" Auto-reload changed files
-set autoread
-
-" set line numbers
-set number
-
-" Automatically start NERDTree on open
-autocmd VimEnter * NERDTree
-
-" Automatically close vim if NERDTree is only buffer left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-" Pushing 't' will toggle NERDTree
-map <C-n> :NERDTreeToggle<CR>
-
-"Open file finder"
-map <C-p> :LeaderfFile<CR>
-
-" Highlight Current Line
-" :set cursorline
-
 " Syntax Coloring
-"
-" :set spell
-" :set spl=en
-:syntax on
-:colorscheme onedark
+syntax on
+colorscheme onedark
 
-" Buffers
-set hidden
+let NERDTreeShowHidden=1 " Display ignored files in NERDTree
+"let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/my-snippets/UltiSnips']
+let g:UltiSnipsListSnippets = "<c-r>"
+let g:fzf_history_dir = '~/.local/share/fzf-history' " Enable per-command history.
+let g:esearch = {'use': 'visual'} " Esearch with visual text
+let mapleader = "\<Space>"
+let g:ag_apply_qmappings=1
+let g:ag_mapping_message=1
+
+" Settings
+set clipboard=unnamed "Use system clipboard
+set backspace=2 " make backspace work like most other programs
+set incsearch " Allow incremental search
+set autoread " Auto-reload changed files
+set number " set line numbers
+set hidden " allow multiple buffers
+set tabstop=2 " show existing tab with 2 spaces width
+set shiftwidth=2 " when indenting with '>', use 2 spaces width
+set expandtab " On pressing tab, insert 2 spaces
+set noswapfile " Disable .swp files
+set mouse=a " enable mouse
+
+" Autocmd
+function! TrimWhiteSpace()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  %s/\r//ge
+  call cursor(l, c)
+endfunction
+autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
+autocmd VimEnter * NERDTree " Automatically start NERDTree on open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Automatically close vim if NERDTree is only buffer left
+autocmd bufwritepost .vimrc source $MYVIMRC " Source the vimrc file after saving it
+
+" Mappings
+map <leader>n :NERDTreeToggle<CR> " Pushing 't' will toggle NERDTree
+map <leader>p :Files<CR> " Open file finder"
+map <leader><s-p> :Files!<CR> " Open file finder full screen
 map <C-w>] :bnext<CR>
 map <C-w>[ :bprev<CR>
 map <C-w>x :bd<CR>
+map <leader>f :Ag<CR> " Ag search full-screen
+map <leader><s-f> :Ag!<CR> " Ag search
+map L $
+map H 0
 
-" enable mouse
-:set mouse=a
+" Map to make it easier to edit and source config files
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>es :UltiSnipsEdit
 
+" Differentiate from input and normal mode
 au InsertEnter * silent execute "!echo -en \<esc>[5 q"
 au InsertLeave * silent execute "!echo -en \<esc>[2 q"
 
-" Source the vimrc file after saving it
-if has("autocmd")
-   autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+ "Ag will only show file contents with a preview
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \   <bang>0)
 
-" Tab filetype plugin indent on
-" show existing tab with 4 spaces width
-set tabstop=2
-" when indenting with '>', use 4 spaces width
-set shiftwidth=2
-" On pressing tab, insert 4 spaces
-set expandtab
-
-" Disable .swp files
-:set noswapfile
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/my-snippets/UltiSnips']
-
-let g:neocomplete#enable_at_startup = 1
-
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
+ "Ag will only show file names with a preview
+command! -bang -nargs=* Files
+  \ call fzf#vim#files(<q-args>,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
