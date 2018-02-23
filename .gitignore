@@ -1,3 +1,2 @@
-.vim/autoload/*
-.vim/bundle/*
-.vim/plugged/*
+.vim/*
+.vim/**
