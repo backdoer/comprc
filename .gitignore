@@ -1,2 +1,2 @@
 .vim/*
-.vim/**
+!.vim/my-snippets/*
