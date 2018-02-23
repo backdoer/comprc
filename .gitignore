@@ -1,1 +1,5 @@
-.vim/*
+.vim/autoload/*
+.vim/bundle/*
+.vim/plugged/*
+.vim/.netrwhist
+.vim/.vim
