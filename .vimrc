@@ -26,6 +26,7 @@ Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
 Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
 Plug 'junegunn/fzf.vim' " Vim plugin for fzf
+Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
 call plug#end()
 
 " Syntax Coloring
@@ -44,6 +45,14 @@ let g:esearch = {'use': 'visual'} " Esearch with visual text
 let mapleader = "\<Space>"
 let g:ag_apply_qmappings=1
 let g:ag_mapping_message=1
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'LightLineFilename'
+      \ }
+      \ }
+function! LightLineFilename()
+  return expand('%')
+endfunction
 
 " Settings
 set clipboard=unnamed "Use system clipboard
@@ -56,7 +65,8 @@ set hidden " allow multiple buffers
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
 "set expandtab " On pressing tab, insert 2 spaces
 set noswapfile " Disable .swp files
-set mouse=a " enable mouse
+"set mouse=a " enable mouse
+set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 
 " Autocmd
 function! TrimWhiteSpace()
@@ -75,7 +85,8 @@ autocmd bufenter * if (winnr("$") == 1
 autocmd bufwritepost .vimrc source $MYVIMRC " Source the vimrc file after saving it
 
 " Mappings
-map <leader>n :NERDTreeToggle<CR> " Pushing 't' will toggle NERDTree
+map <leader>n :NERDTreeToggle<CR>
+map <leader><s-n> :NERDTreeFind<CR>
 map <leader>p :Files<CR> " Open file finder"
 map <leader><s-p> :Files!<CR> " Open file finder full screen
 map <C-w>] :bnext<CR>
@@ -90,6 +101,10 @@ map H 0
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>es :UltiSnipsEdit
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 " Differentiate from input and normal mode
 au InsertEnter * silent execute "!echo -en \<esc>[5 q"
