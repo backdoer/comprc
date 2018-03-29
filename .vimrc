@@ -27,6 +27,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
 Plug 'junegunn/fzf.vim' " Vim plugin for fzf
 Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
+Plug 'ryanoasis/vim-devicons' " dev icons for vim
 call plug#end()
 
 " Syntax Coloring
