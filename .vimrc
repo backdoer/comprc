@@ -82,13 +82,19 @@ autocmd bufenter * if (winnr("$") == 1
   \ && exists("b:NERDTree")
   \ && b:NERDTree.isTabTree())
   \ | q | endif " Automatically close vim if NERDTree is only buffer left
-autocmd bufwritepost .vimrc source $MYVIMRC " Source the vimrc file after saving it
+"autocmd bufwritepost .vimrc source $MYVIMRC " Source the vimrc file after saving it
 
 " Mappings
 map <leader>n :NERDTreeToggle<CR>
 map <leader><s-n> :NERDTreeFind<CR>
-map <leader>p :Files<CR> " Open file finder"
-map <leader><s-p> :Files!<CR> " Open file finder full screen
+" Open file finder"
+map <leader>p :Files<CR>
+" Open file finder full screen
+map <leader><s-p> :Files!<CR>
+" Search and replace word under cursor
+nnoremap <Leader>r :%s/<C-r><C-w>//g<left><left>
+" Search and replace word in clipboard
+nnoremap <Leader><s-r> :%s/<C-r>0//g<left><left>
 map <C-w>] :bnext<CR>
 map <C-w>[ :bprev<CR>
 map <C-w>x :bd<CR>
