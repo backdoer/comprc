@@ -68,6 +68,9 @@ set shiftwidth=2 " when indenting with '>', use 2 spaces width
 set noswapfile " Disable .swp files
 "set mouse=a " enable mouse
 set laststatus=2 " always enable lightline even if nerdtree isn't toggled
+set nofoldenable                                " Enables code folding
+set foldmethod=syntax
+set foldlevel=2
 
 " Autocmd
 function! TrimWhiteSpace()
