@@ -70,7 +70,7 @@ set noswapfile " Disable .swp files
 set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 set nofoldenable                                " Enables code folding
 set foldmethod=syntax
-set foldlevel=2
+set foldlevel=1
 
 " Autocmd
 function! TrimWhiteSpace()
