@@ -29,6 +29,9 @@ alias sesh_tmux="tmux list-sessions"
 alias ntmux="tmux new-session -s"
 alias asesh_tmux="tmux attach -t"
 
+# CLEAR SCREEn
+alias c="clear"
+
 #Default Editor
 export EDITOR="vim"
 
