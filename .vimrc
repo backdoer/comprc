@@ -11,15 +11,15 @@ Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
 Plug 'itchyny/lightline.vim' " File info at bottom of vim
 Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
-"Plug 'Shougo/neocomplete.vim' " Neocomplete
-"Plug 'Shougo/neosnippet.vim'
+""Plug 'Shougo/neocomplete.vim' " Neocomplete
+""Plug 'Shougo/neosnippet.vim'
 Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
 Plug 'elixir-editors/vim-elixir' " Elixir support for vim
 Plug 'slashmili/alchemist.vim' " Elixir support for vim
 Plug 'scrooloose/nerdcommenter' " Comment support
-Plug 'pangloss/vim-javascript' " Javascript support for vim
+"Plug 'pangloss/vim-javascript' " Javascript support for vim
 Plug 'mxw/vim-jsx' " Jsx support for vim
-Plug 'mattn/emmet-vim' " Html expansion
+"Plug 'mattn/emmet-vim' " Html expansion
 Plug 'tpope/vim-fugitive' " Vim git integration
 Plug 'airblade/vim-gitgutter' " Vim gutter integration
 Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
