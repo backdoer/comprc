@@ -22,7 +22,7 @@ echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
+# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
     echo "Moving any existing dotfiles from ~ to $olddir"
     mv ~/.$file $olddir
@@ -30,14 +30,17 @@ for file in $files; do
     ln -s $dir/.$file ~/.$file
 done
 
+# Change permissions on autload file
+sudo chmod -R 755 ~/.vim/autoload
 
 # Install Vundle for managing Vim plugins
-echo "Installing Vundle"
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+echo "Installing Plug"
+sudo curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install the rest of the plugins
 echo "Installing All Vim Plugins"
-vim +PluginInstall +qall
+sudo vim +PlugInstall
 
 # Clear the screen
 clear
