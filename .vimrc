@@ -1,4 +1,4 @@
-
+"
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -13,11 +13,11 @@ Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
 ""Plug 'Shougo/neocomplete.vim' " Neocomplete
 ""Plug 'Shougo/neosnippet.vim'
-Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
+"Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
 Plug 'elixir-editors/vim-elixir' " Elixir support for vim
 Plug 'slashmili/alchemist.vim' " Elixir support for vim
 Plug 'scrooloose/nerdcommenter' " Comment support
-"Plug 'pangloss/vim-javascript' " Javascript support for vim
+Plug 'pangloss/vim-javascript' " Javascript support for vim
 Plug 'mxw/vim-jsx' " Jsx support for vim
 "Plug 'mattn/emmet-vim' " Html expansion
 Plug 'tpope/vim-fugitive' " Vim git integration
@@ -47,12 +47,12 @@ let mapleader = "\<Space>"
 let g:ag_apply_qmappings=1
 let g:ag_mapping_message=1
 let g:lightline = {
-      \ 'component_function': {
-      \   'filename': 'LightLineFilename'
-      \ }
-      \ }
+     \ 'component_function': {
+     \   'filename': 'LightLineFilename'
+     \ }
+     \ }
 function! LightLineFilename()
-  return expand('%')
+ return expand('%')
 endfunction
 
 " Settings
@@ -60,7 +60,8 @@ set clipboard=unnamed "Use system clipboard
 set backspace=2 " make backspace work like most other programs
 set incsearch " Allow incremental search
 set autoread " Auto-reload changed files
-set number " set line numbers
+set number
+"set relativenumber
 set hidden " allow multiple buffers
 "set tabstop=2 " show existing tab with 2 spaces width
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
@@ -68,9 +69,9 @@ set shiftwidth=2 " when indenting with '>', use 2 spaces width
 set noswapfile " Disable .swp files
 "set mouse=a " enable mouse
 set laststatus=2 " always enable lightline even if nerdtree isn't toggled
-set nofoldenable                                " Enables code folding
-set foldmethod=syntax
-set foldlevel=1
+"set nofoldenable                                " Enables code folding
+"set foldmethod=syntax
+"set foldlevel=1
 
 " Autocmd
 function! TrimWhiteSpace()

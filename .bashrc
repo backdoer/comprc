@@ -42,6 +42,10 @@ alias e_vimrc="vim $HOME/.vimrc"
 alias gp="git push"
 alias gb="git branch"
 
+#Docker
+alias dc="docker-compose"
+alias d="docker"
+
 gco(){
   git checkout $1
 }
