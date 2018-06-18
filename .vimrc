@@ -1,10 +1,6 @@
 "
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree' " Directory structure
 Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
