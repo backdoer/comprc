@@ -42,6 +42,9 @@ sudo curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 echo "Installing All Vim Plugins"
 sudo vim +PlugInstall +qall
 
+# Source bashrc in bash profile
+cat "source ~/.bashrc" >> ~/.bash_profile
+
 # Clear the screen
 clear
 
