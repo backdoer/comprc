@@ -40,7 +40,7 @@ sudo curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # Install the rest of the plugins
 echo "Installing All Vim Plugins"
-vim +PlugInstall
+vim +PlugInstall +qall
 
 # Clear the screen
 clear
