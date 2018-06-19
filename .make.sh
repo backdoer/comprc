@@ -17,11 +17,15 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   # package to compare floating point numbers
   apt-get install bc
   apt-get install tmux
+  apt-get install fortune
+  apt-get install cowsay
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   brew install ag
   # package to compare floating point numbers
   brew install bc
   brew install tmux
+  brew install fortune
+  brew install cowsay
 fi
 
 # create dotfiles_old in homedir
