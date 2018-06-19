@@ -13,12 +13,12 @@ files="bashrc vimrc vim tmux.conf"    # list of files/folders to symlink in home
 ##########
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  apt-get install silversearcher-ag
+  sudo apt-get install silversearcher-ag
   # package to compare floating point numbers
-  apt-get install bc
-  apt-get install tmux
-  apt-get install fortune
-  apt-get install cowsay
+  sudo apt-get install bc
+  sudo apt-get install tmux
+  sudo apt-get install fortune
+  sudo apt-get install cowsay
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   brew install ag
   # package to compare floating point numbers
