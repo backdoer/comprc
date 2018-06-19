@@ -12,6 +12,16 @@ files="bashrc vimrc vim tmux.conf"    # list of files/folders to symlink in home
 
 ##########
 
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  apt-get install silversearcher-ag
+  # package to compare floating point numbers
+  apt-get install bc
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  brew install ag
+  # package to compare floating point numbers
+  brew install bc
+fi
+
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
 mkdir -p $olddir
