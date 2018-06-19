@@ -43,7 +43,7 @@ echo "Installing All Vim Plugins"
 sudo vim +PlugInstall +qall
 
 # Source bashrc in bash profile
-sudo cat "source ~/.bashrc" >> ~/.bash_profile
+sudo echo "source ~/.bashrc" >> ~/.bash_profile
 
 # Clear the screen
 clear
