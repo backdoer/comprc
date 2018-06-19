@@ -16,10 +16,12 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   apt-get install silversearcher-ag
   # package to compare floating point numbers
   apt-get install bc
+  apt-get install tmux
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   brew install ag
   # package to compare floating point numbers
   brew install bc
+  brew install tmux
 fi
 
 # create dotfiles_old in homedir
