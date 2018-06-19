@@ -59,6 +59,11 @@ sudo chmod -R 755 ~/.vim/autoload
 echo "Installing All Vim Plugins"
 sudo vim +PlugInstall +qall
 
+# Change permissions on autload file
+sudo chmod -R 755 ~/.vim/autoload
+
+sudo chmod -R 755 ~/.local/share/fzf-history
+
 # Source bashrc in bash profile
 sudo echo "source ~/.bashrc" >> ~/.bash_profile
 
