@@ -71,5 +71,4 @@ sudo echo "source ~/.bashrc" >> ~/.bash_profile
 # Clear the screen
 clear
 
-# Source the bashrc
-source .bashrc
+tmux
