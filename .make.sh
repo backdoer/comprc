@@ -19,6 +19,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   sudo apt-get install tmux
   sudo apt-get install fortune
   sudo apt-get install cowsay
+  sudo apt-get install vim
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   brew install ag
   # package to compare floating point numbers
