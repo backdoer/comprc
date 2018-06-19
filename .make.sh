@@ -40,14 +40,13 @@ for file in $files; do
     ln -s $dir/.$file ~/.$file
 done
 
-# Install Vundle for managing Vim plugins
+# Install Plug for managing Vim plugins
 echo "Installing Plug"
 sudo curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Change permissions on autload file
 sudo chmod -R 755 ~/.vim/autoload
-
 
 # Install the rest of the plugins
 echo "Installing All Vim Plugins"
