@@ -62,6 +62,7 @@ sudo vim +PlugInstall +qall
 # Change permissions on autload file
 sudo chmod -R 755 ~/.vim/autoload
 
+# Make fzf history public
 sudo chmod -R 755 ~/.local/share/fzf-history
 
 # Source bashrc in bash profile
