@@ -9,9 +9,6 @@ fortune | cowsay
 
 # If you come from bash you might have to change your $PATH.
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
-#export NVM_DIR="$HOME/.nvm"
-#. "/usr/local/opt/nvm/nvm.sh"
-
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/tylerdoermann/.oh-my-zsh
@@ -21,16 +18,6 @@ export ZSH=/Users/tylerdoermann/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-
-# git
-gall(){
-  git add .
-  git commit -m "$1"
-  git push
-}
-
-# clear
-alias c=clear
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -118,3 +105,13 @@ source ~/.fzf.zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# git
+gall(){
+  git add .
+  git commit -m "$1"
+  git push
+}
+
+# clear
+alias c=clear
