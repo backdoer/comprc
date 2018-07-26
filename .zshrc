@@ -124,16 +124,20 @@ alias sesh_tmux="tmux list-sessions"
 alias ntmux="tmux new-session -s"
 alias asesh_tmux="tmux attach -t"
 
+# directories
+alias ls='ls -GFh'
+
 # THEME
 # af-magic.zsh-theme
 # Repo: https://github.com/andyfleming/oh-my-zsh
 # Direct Link: https://github.com/andyfleming/oh-my-zsh/blob/master/themes/af-magic.zsh-theme
 
+export LSCOLORS='gxBxhxDxfxhxhxhxhxcxcx'
 # primary prompt
 PROMPT='\
-$FG[032]%~\
+$FG[039]%~\
 $(git_prompt_info) \
-$FG[032]%(!.#.»)%{$reset_color%} '
+$FG[039]%(!.#.»)%{$reset_color%} '
 
 # color vars
 eval my_gray='$FG[237]'
