@@ -8,7 +8,7 @@
 
 dir=~/comprc                    # dotfiles directory
 olddir=~/comprc_old             # old dotfiles backup directory
-files="bashrc vimrc vim tmux.conf"    # list of files/folders to symlink in homedir
+files="bashrc zshrc vimrc vim tmux.conf"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -61,8 +61,8 @@ sudo chmod -R 755 ~/.vim/autoload
 echo "Installing All Vim Plugins"
 sudo vim +PlugInstall +qall
 
-# Change permissions on autload file
-sudo chmod -R 755 ~/.vim/autoload
+ #Change permissions on autload file...already do this up above
+#sudo chmod -R 755 ~/.vim/autoload
 
 # Make fzf history public
 sudo chmod -R 755 ~/.local/share/fzf-history
@@ -74,8 +74,7 @@ sudo chsh -s $(which zsh)
 #sudo echo "source ~/.bashrc" >> ~/.bash_profile
 
 # Source zshrc in zprofile
-sudo echo "source ~/.zshrc" >> ~/.zprofile
-
+#sudo echo "source ~/.zshrc" >> ~/.zprofile
 
 # Clear the screen
 clear
