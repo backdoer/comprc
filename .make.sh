@@ -13,6 +13,7 @@ files="bashrc vimrc vim tmux.conf"    # list of files/folders to symlink in home
 ##########
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  sudo apt-get install zsh
   sudo apt-get install silversearcher-ag
   # package to compare floating point numbers
   sudo apt-get install bc
@@ -21,6 +22,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   sudo apt-get install cowsay
   sudo apt-get install vim
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+  brew install zsh
   brew install ag
   # package to compare floating point numbers
   brew install bc
@@ -41,16 +43,16 @@ echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file $olddir
-    echo "Creating symlink to $file in home directory."
-    ln -s $dir/.$file ~/.$file
+  echo "Moving any existing dotfiles from ~ to $olddir"
+  mv ~/.$file $olddir
+  echo "Creating symlink to $file in home directory."
+  ln -s $dir/.$file ~/.$file
 done
 
 # Install Plug for managing Vim plugins
 echo "Installing Plug"
 sudo curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Change permissions on autload file
 sudo chmod -R 755 ~/.vim/autoload
@@ -65,8 +67,15 @@ sudo chmod -R 755 ~/.vim/autoload
 # Make fzf history public
 sudo chmod -R 755 ~/.local/share/fzf-history
 
+# switch to zsh shell
+sudo chsh -s $(which zsh)
+
 # Source bashrc in bash profile
-sudo echo "source ~/.bashrc" >> ~/.bash_profile
+#sudo echo "source ~/.bashrc" >> ~/.bash_profile
+
+# Source zshrc in zprofile
+sudo echo "source ~/.zshrc" >> ~/.zprofile
+
 
 # Clear the screen
 clear

@@ -53,9 +53,9 @@ gn(){
   git checkout -b $1
 }
 gall(){
-	git add .
-	git commit -m "$1"
-	git push
+  git add .
+  git commit -m "$1"
+  git push
 }
 gd(){
   git branch -d $1
@@ -63,18 +63,18 @@ gd(){
 
 # Commits all changes in comrc directory and pushes to master
 gcomprc(){
-	cwd=$(pwd)
-	cd ~/comprc
-	$(gall "$1")
-	cd $cwd
+  cwd=$(pwd)
+  cd ~/comprc
+  $(gall "$1")
+  cd $cwd
 }
 pcomprc(){
-	cwd=$(pwd)
-	cd ~/comprc
-	git pull origin master
-	cd $cwd
-	s_bashrc
-	s_tmux
+  cwd=$(pwd)
+  cd ~/comprc
+  git pull origin master
+  cd $cwd
+  s_bashrc
+  s_tmux
 }
 
 # Show git status in terminal
@@ -86,16 +86,16 @@ GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 
 export PS1='\[\e[1;36m\]\w\[\e[0m\]$(__git_ps1 "(%s)")\$ '
-#export PS1='\[\e[1;32m\]\u\[\e[0m\]@\[\e[1;34m\]\h\[\e[0m\]:\[\e[1;36m\]\w\[\e[0m\]$(__git_ps1 "(%s)")\$ '
-#export PS1="\w \$"
+export PS1='\[\e[1;32m\]\u\[\e[0m\]@\[\e[1;34m\]\h\[\e[0m\]:\[\e[1;36m\]\w\[\e[0m\]$(__git_ps1 "(%s)")\$ '
+export PS1="\w \$"
 
 if [[ ! -f /tmp/.id_added ]];then
-	 ssh-add -K ~/.ssh/id_rsa
-	  touch /tmp/.id_added
+  ssh-add -K ~/.ssh/id_rsa
+  touch /tmp/.id_added
 fi
 
 #Terminal Design
-#export PS1='\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]$(__git_ps1 "(%s)"\$'
+export PS1='\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]$(__git_ps1 "(%s)"\$'
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 

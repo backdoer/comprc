@@ -7,8 +7,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
 Plug 'itchyny/lightline.vim' " File info at bottom of vim
 Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
-""Plug 'Shougo/neocomplete.vim' " Neocomplete
-""Plug 'Shougo/neosnippet.vim'
+"Plug 'Shougo/neocomplete.vim' " Neocomplete
+"Plug 'Shougo/neosnippet.vim'
 "Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
 Plug 'elixir-editors/vim-elixir' " Elixir support for vim
 Plug 'slashmili/alchemist.vim' " Elixir support for vim
@@ -43,12 +43,12 @@ let mapleader = "\<Space>"
 let g:ag_apply_qmappings=1
 let g:ag_mapping_message=1
 let g:lightline = {
-     \ 'component_function': {
-     \   'filename': 'LightLineFilename'
-     \ }
-     \ }
+      \ 'component_function': {
+      \   'filename': 'LightLineFilename'
+      \ }
+      \ }
 function! LightLineFilename()
- return expand('%')
+  return expand('%')
 endfunction
 
 " Settings
@@ -80,9 +80,9 @@ endfunction
 autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
 autocmd VimEnter * NERDTree " Automatically start NERDTree on open
 autocmd bufenter * if (winnr("$") == 1
-  \ && exists("b:NERDTree")
-  \ && b:NERDTree.isTabTree())
-  \ | q | endif " Automatically close vim if NERDTree is only buffer left
+      \ && exists("b:NERDTree")
+      \ && b:NERDTree.isTabTree())
+      \ | q | endif " Automatically close vim if NERDTree is only buffer left
 "autocmd bufwritepost .vimrc source $MYVIMRC " Source the vimrc file after saving it
 
 " Mappings
@@ -113,20 +113,20 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Differentiate from input and normal mode
-au InsertEnter * silent execute "!echo -en \<esc>[5 q"
-au InsertLeave * silent execute "!echo -en \<esc>[2 q"
+"" Differentiate from input and normal mode
+"au InsertEnter * silent execute "!echo -en \<esc>[5 q"
+"au InsertLeave * silent execute "!echo -en \<esc>[2 q"
 
- "Ag will only show file contents with a preview
+"Ag will only show file contents with a preview
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-  \   <bang>0)
+      \ call fzf#vim#ag(<q-args>,
+      \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+      \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+      \   <bang>0)
 
- "Ag will only show file names with a preview
+"Ag will only show file names with a preview
 command! -bang -nargs=* Files
-  \ call fzf#vim#files(<q-args>,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+      \ call fzf#vim#files(<q-args>,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
