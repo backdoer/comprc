@@ -17,7 +17,7 @@ export ZSH=/Users/tylerdoermann/.oh-my-zsh
 #
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="af-magic"
+#ZSH_THEME="af-magic"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -115,3 +115,32 @@ gall(){
 
 # clear
 alias c=clear
+
+###TMUX
+alias e_tmux="vim $HOME/.tmux.conf"
+alias s_tmux="tmux source-file $HOME/.tmux.conf"
+alias ksesh_tmux="tmux kill-session -t"
+alias sesh_tmux="tmux list-sessions"
+alias ntmux="tmux new-session -s"
+alias asesh_tmux="tmux attach -t"
+
+# THEME
+# af-magic.zsh-theme
+# Repo: https://github.com/andyfleming/oh-my-zsh
+# Direct Link: https://github.com/andyfleming/oh-my-zsh/blob/master/themes/af-magic.zsh-theme
+
+# primary prompt
+PROMPT='\
+$FG[032]%~\
+$(git_prompt_info) \
+$FG[032]%(!.#.»)%{$reset_color%} '
+
+# color vars
+eval my_gray='$FG[237]'
+eval my_orange='$FG[214]'
+
+# git settings
+ZSH_THEME_GIT_PROMPT_PREFIX="$FG[255]($FG[255]"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
