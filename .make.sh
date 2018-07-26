@@ -71,7 +71,7 @@ sudo vim +PlugInstall +qall
 sudo chmod -R 755 ~/.local/share/fzf-history
 
 # switch to zsh shell
-sudo chsh -s $(which zsh)
+sudo chsh -s /bin/zsh
 
 # Source bashrc in bash profile
 #sudo echo "source ~/.bashrc" >> ~/.bash_profile
