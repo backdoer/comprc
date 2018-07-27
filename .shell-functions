@@ -1,0 +1,54 @@
+echo_intro(){
+  echo "██████╗  █████╗  ██████╗██╗  ██╗██████╗  ██████╗ ███████╗██████╗ "
+  echo "██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔═══██╗██╔════╝██╔══██╗"
+  echo "██████╔╝███████║██║     █████╔╝ ██║  ██║██║   ██║█████╗  ██████╔╝"
+  echo "██╔══██╗██╔══██║██║     ██╔═██╗ ██║  ██║██║   ██║██╔══╝  ██╔══██╗"
+  echo "██████╔╝██║  ██║╚██████╗██║  ██╗██████╔╝╚██████╔╝███████╗██║  ██║"
+  echo "╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝"
+  echo "                                                                 "
+  fortune | cowsay
+}
+
+# Add Identity
+if [[ ! -f /tmp/.id_added ]];then
+  ssh-add -K ~/.ssh/id_rsa
+  touch /tmp/.id_added
+fi
+
+# clear
+alias c=clear
+
+# TMUX
+alias e_tmux="vim $HOME/.tmux.conf"
+alias s_tmux="tmux source-file $HOME/.tmux.conf"
+alias ksesh_tmux="tmux kill-session -t"
+alias sesh_tmux="tmux list-sessions"
+alias ntmux="tmux new-session -s"
+alias asesh_tmux="tmux attach -t"
+
+# git
+gco(){
+  git checkout $1
+}
+gn(){
+  git checkout -b $1
+}
+gall(){
+  git add .
+  git commit -m "$1"
+  git push
+}
+gd(){
+  git branch -d $1
+}
+
+# directories
+alias ls='ls -GFh'
+
+#VIM
+export EDITOR="vim"
+alias e_vimrc="vim $HOME/.vimrc"
+
+#Docker
+alias dc="docker-compose"
+alias d="docker"

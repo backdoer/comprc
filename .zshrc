@@ -1,11 +1,8 @@
-echo "██████╗  █████╗  ██████╗██╗  ██╗██████╗  ██████╗ ███████╗██████╗ "
-echo "██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔═══██╗██╔════╝██╔══██╗"
-echo "██████╔╝███████║██║     █████╔╝ ██║  ██║██║   ██║█████╗  ██████╔╝"
-echo "██╔══██╗██╔══██║██║     ██╔═██╗ ██║  ██║██║   ██║██╔══╝  ██╔══██╗"
-echo "██████╔╝██║  ██║╚██████╗██║  ██╗██████╔╝╚██████╔╝███████╗██║  ██║"
-echo "╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝"
-echo "                                                                 "
-fortune | cowsay
+# Source shared shell commands
+source ~/comprc/.shell-functions
+
+# Into
+echo_intro
 
 # If you come from bash you might have to change your $PATH.
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -24,34 +21,11 @@ plugins=(
   git
 )
 
+# oh my zsh
 source $ZSH/oh-my-zsh.sh
 
 # fzf
-source ~/.fzf.zsh
-
-# User configuration
-export EDITOR='vim'
-
-# git
-gall(){
-  git add .
-  git commit -m "$1"
-  git push
-}
-
-# clear
-alias c=clear
-
-# TMUX
-alias e_tmux="vim $HOME/.tmux.conf"
-alias s_tmux="tmux source-file $HOME/.tmux.conf"
-alias ksesh_tmux="tmux kill-session -t"
-alias sesh_tmux="tmux list-sessions"
-alias ntmux="tmux new-session -s"
-alias asesh_tmux="tmux attach -t"
-
-# directories
-alias ls='ls -GFh'
+[ -f ~/.fzf.fzf ] && source ~/.fzf.zsh
 
 # THEME
 # af-magic.zsh-theme
