@@ -106,8 +106,9 @@ map H 0
 
 " Map to make it easier to edit and source config files
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>es :UltiSnipsEdit
+nnoremap <leader>ev :edit $MYVIMRC<cr>
+nnoremap <leader>ec :edit $HOME/comprc<cr>
+nnoremap <leader>es :UltiSnipsEdit<cr>
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
