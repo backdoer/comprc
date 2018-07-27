@@ -19,13 +19,15 @@ export ZSH=$HOME/.oh-my-zsh
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  zsh-syntax-highlighting
+  colored-man-pages
 )
 
 # oh my zsh
 source $ZSH/oh-my-zsh.sh
 
 # fzf
-[ -f ~/.fzf.fzf ] && source ~/.fzf.zsh
+source ~/.fzf.zsh
 
 # THEME
 # af-magic.zsh-theme
