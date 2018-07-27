@@ -30,7 +30,7 @@ source $HOME/comprc/.git-prompt.sh
 # For git bash prompts
 GIT_PS1_SHOWDIRTYSTATE=1
 #GIT_PS1_SHOWSTASHSTATE=1
-#GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
 
 
 #Terminal Design
