@@ -24,6 +24,9 @@ plugins=(
 # oh my zsh
 source $ZSH/oh-my-zsh.sh
 
+# Directory listings
+alias ls='ls -GF'
+
 # fzf
 [ -f ~/.fzf.fzf ] && source ~/.fzf.zsh
 
