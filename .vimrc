@@ -101,6 +101,7 @@ map <C-w>[ :bprev<CR>
 map <C-w>x :bd<CR>
 map <leader>f :Ag<CR> " Ag search full-screen
 map <leader><s-f> :Ag!<CR> " Ag search
+map ; :Buffers<CR>
 map L $
 map H 0
 
@@ -113,6 +114,15 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+noremap <leader>q :q<CR>
+noremap <leader>w :w<CR>
+noremap <leader>e :edit!<CR>
+
+"" Tests
+nmap <Leader>t :execute "!clear && mix test %\\:" . line(".")<CR>
+nmap <Leader>T :execute "!clear && mix test %"<CR>
+
+"cnoremap <silent> q<CR> :echo "This is vim. You can never leave."<CR>
 
 "" Differentiate from input and normal mode
 "au InsertEnter * silent execute "!echo -en \<esc>[5 q"
@@ -130,4 +140,4 @@ command! -bang -nargs=* Files
       \ call fzf#vim#files(<q-args>,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
+      \   <bang>-1)
