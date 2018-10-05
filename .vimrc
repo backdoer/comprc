@@ -59,7 +59,7 @@ set autoread " Auto-reload changed files
 set number
 "set relativenumber
 set hidden " allow multiple buffers
-"set tabstop=2 " show existing tab with 2 spaces width
+set tabstop=2 " show existing tab with 2 spaces width
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
 "set expandtab " On pressing tab, insert 2 spaces
 set noswapfile " Disable .swp files
@@ -122,8 +122,6 @@ noremap <leader>e :edit!<CR>
 nmap <Leader>t :execute "!clear && mix test %\\:" . line(".")<CR>
 nmap <Leader>T :execute "!clear && mix test %"<CR>
 
-"cnoremap <silent> q<CR> :echo "This is vim. You can never leave."<CR>
-
 "" Differentiate from input and normal mode
 "au InsertEnter * silent execute "!echo -en \<esc>[5 q"
 "au InsertLeave * silent execute "!echo -en \<esc>[2 q"
@@ -140,4 +138,4 @@ command! -bang -nargs=* Files
       \ call fzf#vim#files(<q-args>,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>-1)
+      \   <bang>0)
