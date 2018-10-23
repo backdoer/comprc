@@ -1,12 +1,41 @@
 priority 1
 
 snippet pry "iex pry" b
-require IEx; 
+require IEx;
 IEx.pry
 endsnippet
 
-snippet defmodule "define module" b
-defmodule ${1:module_name} 
+snippet defmo "define module" b
+defmodule ${1:module_name} do
+	@moduledoc """
+	${2:module_doc}
+	"""
+
 	$0
 end
+endsnippet
+
+snippet spec "create spec" b
+@spec ${1:spec_name}(${2:types}) :: ${0:return_types}
+endsnippet
+
+snippet def
+@doc """
+${2:doc}
+"""
+@spec $1(${3:types}) :: ${4:return_types}
+def ${1:name}(${5:params}) do
+	${0}
+end
+endsnippet
+
+snippet defp
+@spec $1(${2:types}) :: ${3:return_types}
+defp ${1:name}(${4:params}) do
+	${0}
+end
+endsnippet
+
+snippet log
+IO.inspect(${0:val})
 endsnippet

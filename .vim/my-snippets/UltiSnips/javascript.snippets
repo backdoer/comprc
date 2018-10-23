@@ -1,0 +1,130 @@
+##################
+### Vanilla JS ###
+##################
+
+# Log
+snippet log
+console.log(${0:val})
+endsnippet
+
+# Pry
+snippet pry
+debugger;
+endsnippet
+
+#############
+### ES6 ###
+#############
+snippet imu
+import { ${1} } from '${0}';
+endsnippet
+
+snippet im
+import ${1} from '${0}';
+endsnippet
+
+#############
+### React ###
+#############
+
+# Import both React and Component
+snippet ri
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+endsnippet
+
+# React class
+snippet class
+class ${1:MyComponent} extends Component {
+	render() {
+		return (
+			${0:<div></div>}
+		)
+	}
+}
+endsnippet
+
+snippet eclass
+export default class ${1:MyComponent} extends Component {
+	render() {
+		return (
+			${0:<div></div>}
+		)
+	}
+}
+endsnippet
+
+# React constructor
+snippet con
+constructor(props) {
+	super(props)
+
+	this.state = {
+		${1}: ${0},
+	}
+}
+endsnippet
+
+# Proptypes for React Class
+snippet pt
+${1:component}.propTypes = {
+	${2}: PropTypes.${0},
+}
+endsnippet
+
+# Default props for React Class
+snippet dp
+${1:component}.defaultProps = {
+	${1}: ${0},
+}
+endsnippet
+
+# State
+snippet ss
+this.setState({
+	${1}: ${0},
+})
+endsnippet
+
+snippet gs
+const { ${0} } = this.state
+endsnippet
+
+# Props
+snippet gp
+const { ${0} } = this.props
+endsnippet
+
+# Styled Components
+snippet sc
+const ${1:name} = styled.${2:type}\`
+	${3:style}: ${0:val};
+\`;
+endsnippet
+
+snippet esc
+export const ${1:name} = styled.${2:type}\`
+	${3:style}: ${0:val};
+\`;
+endsnippet
+
+# With props
+snippet scp
+const ${1:name} = styled.${2:type}\`
+  ${({ ${3:prop} }) =>
+    $3 &&
+    \`
+    ${4:style}: ${0:val};
+  \`};
+\`;
+endsnippet
+
+snippet escp
+export const ${1:name} = styled.${2:type}\`
+  ${({ ${3:prop} }) =>
+    $3 &&
+    \`
+    ${4:style}: ${0:val};
+  \`};
+\`;
+endsnippet
