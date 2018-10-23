@@ -1,5 +1,4 @@
-"
-filetype off                  " required
+filetype off
 
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree' " Directory structure
@@ -54,6 +53,7 @@ set number
 """""""""""""""""
 let NERDTreeMapOpenSplit='<C-x>'
 let NERDTreeMapOpenVSplit='<C-v>'
+let NERDTreeMapOpenInTab='<C-t>'
 let NERDTreeShowHidden=1 " Display ignored files in NERDTree
 let g:NERDTreeWinSize=40
 autocmd bufenter * if (winnr("$") == 1
@@ -135,8 +135,10 @@ noremap <C-l> <C-w>l
 """""""""""""""""""""""
 """ Search and Replace
 """""""""""""""""""""""
-nnoremap <Leader>r :%s/<C-r><C-w>//g<left><left> " Search and replace word under cursor
-nnoremap <Leader><s-r> :%s/<C-r>0//g<left><left> " Search and replace word in clipboard
+" Search and replace word under cursor
+nnoremap <Leader>r :%s/<C-r><C-w>//g<left><left>
+" Search and replace word in clipboard
+nnoremap <Leader><s-r> :%s/<C-r>0//g<left><left>
 
 """"""""""""""""""""
 """ Buffers/Windows

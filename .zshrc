@@ -20,6 +20,7 @@ export ZSH=$HOME/.oh-my-zsh
 plugins=(
   git
   colored-man-pages
+	#zsh-autosuggestions
   #zsh-syntax-highlighting
 )
 
