@@ -21,6 +21,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   sudo apt-get install fortune
   sudo apt-get install cowsay
   sudo apt-get install vim
+  sudo apt-get install ranger
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   brew install zsh
   brew install ag
@@ -29,6 +30,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   brew install tmux
   brew install fortune
   brew install cowsay
+  brew install ranger
 fi
 
 # oh my zsh

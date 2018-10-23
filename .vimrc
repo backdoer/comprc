@@ -1,13 +1,15 @@
 filetype off
 
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree' " Directory structure
-Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
+"Plug 'scrooloose/nerdtree' " Directory structure
+"Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
+Plug 'francoiscabrol/ranger.vim' " Ranger
+Plug 'tpope/vim-vinegar' " Vinegar
 Plug 'itchyny/lightline.vim' " File info at bottom of vim
 Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
 Plug 'elixir-editors/vim-elixir' " Elixir support for vim
-Plug 'slashmili/alchemist.vim' " Elixir support for vim
+"Plug 'slashmili/alchemist.vim' " Elixir support for vim
 Plug 'scrooloose/nerdcommenter' " Comment support
 Plug 'pangloss/vim-javascript' " Javascript support for vim
 Plug 'mxw/vim-jsx' " Jsx support for vim
@@ -26,6 +28,8 @@ Plug 'vim-ruby/vim-ruby' " ruby syntax
 Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'kana/vim-submode' " submode
 call plug#end()
+
+set shell=bash
 
 """""""""""""""""
 """ Core
@@ -51,18 +55,38 @@ set number
 """""""""""""""""
 """ Nerd Tree
 """""""""""""""""
-let NERDTreeMapOpenSplit='<C-x>'
-let NERDTreeMapOpenVSplit='<C-v>'
-let NERDTreeMapOpenInTab='<C-t>'
-let NERDTreeShowHidden=1 " Display ignored files in NERDTree
-let g:NERDTreeWinSize=40
-autocmd bufenter * if (winnr("$") == 1
-      \ && exists("b:NERDTree")
-      \ && b:NERDTree.isTabTree())
-      \ | q | endif " Automatically close vim if NERDTree is only buffer left
+"let NERDTreeMapOpenSplit='<C-x>'
+"let NERDTreeMapOpenVSplit='<C-v>'
+"let NERDTreeMapOpenInTab='<C-t>'
+"let g:NERDTreeMapJumpPrevSibling="" " To allow tmux/vim navigation
+"let g:NERDTreeMapJumpNextSibling="" " To allow tmux/vim navigation
+"let NERDTreeShowHidden=1 " Display ignored files in NERDTree
+"autocmd bufenter * if (winnr("$") == 1
+			"\ && exists("b:NERDTree")
+			"\ && b:NERDTree.isTabTree())
+			"\ | q | endif " Automatically close vim if NERDTree is only buffer left
 "autocmd VimEnter * NERDTree " Automatically start NERDTree on open
-map <leader>n :NERDTreeToggle<CR>
-map <leader><s-n> :NERDTreeFind<CR>
+"let g:NERDTreeWinSize=40
+"map <leader>n :NERDTreeToggle<CR>
+"map <leader><s-n> :NERDTreeFind<CR>
+
+"""""""""""""""""
+""" Ranger
+"""""""""""""""""
+let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
+noremap <leader>n :RangerWorkingDirectory<CR>
+noremap <leader><s-n> :RangerCurrentFile<CR>
+let g:ranger_map_keys = 0
+noremap <leader>t :RangerWorkingDirectoryNewTab<CR>
+noremap <leader><s-t> :RangerCurrentFileNewTab<CR>
+
+""""""""""""""""""""
+""" Netrw
+""""""""""""""""""""
+noremap <leader>v :vsplit .<CR>
+noremap <leader>x :split .<CR>
+noremap <leader><s-v> :vsplit %:h/<CR>
+noremap <leader><s-x> :split %:h/<CR>
 
 """""""""""""""""
 """ Snippets
@@ -86,16 +110,16 @@ map <leader><s-p> :Files!<CR> " Open file finder full screen
 map <leader>f :Ag<CR> " Ag search full-screen
 map <leader><s-f> :Ag!<CR> " Ag search
 command! -bang -nargs=* Ag
-      \ call fzf#vim#ag(<q-args>,
-      \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-      \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-      \   <bang>0) "Ag will show file contents with a preview
+			\ call fzf#vim#ag(<q-args>,
+			\   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+			\           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+			\   <bang>0) "Ag will show file contents with a preview
 
 command! -bang -nargs=* Files
-      \ call fzf#vim#files(<q-args>,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0) "Ag will show file names with a preview
+			\ call fzf#vim#files(<q-args>,
+			\   <bang>0 ? fzf#vim#with_preview('up:60%')
+			\           : fzf#vim#with_preview('right:50%:hidden', '?'),
+			\   <bang>0) "Ag will show file names with a preview
 
 """""""""""""""""
 """ Lightline
@@ -150,17 +174,17 @@ map ; :Buffers<CR>
 noremap <leader>q :q<CR>
 noremap <leader>w :w<CR>
 noremap <leader>e :edit!<CR>
-noremap <leader>vs :vsplit .<CR>
-noremap <leader>xs :split .<CR>
-	""""""""""""""""""""
-	""" Resizing
-	""""""""""""""""""""
-	call submode#enter_with('resize', 'n', '', '<leader>+', '<leader>+')
-	call submode#enter_with('resize', 'n', '', '<leader>_', '<leader>_')
-	call submode#map('resize', 'n', '', '=', ':vertical res +5<CR>')
-	call submode#map('resize', 'n', '', '-', ':vertical res -5<CR>')
-	call submode#map('resize', 'n', '', '+', ':res +5<CR>')
-	call submode#map('resize', 'n', '', '_', ':res -5<CR>')
+map <leader><s-e> :edit!<CR>
+
+""""""""""""""""""""
+""" Resizing Windows
+""""""""""""""""""""
+call submode#enter_with('resize', 'n', '', '<leader>+', '<leader>+')
+call submode#enter_with('resize', 'n', '', '<leader>_', '<leader>_')
+call submode#map('resize', 'n', '', '=', ':vertical res +5<CR>')
+call submode#map('resize', 'n', '', '-', ':vertical res -5<CR>')
+call submode#map('resize', 'n', '', '+', ':res +5<CR>')
+call submode#map('resize', 'n', '', '_', ':res -5<CR>')
 
 """""""""""""""""""""
 """ Quick File Edits
@@ -173,5 +197,5 @@ nnoremap <leader>es :UltiSnipsEdit<cr>
 """"""""""""""""
 """ Tests
 """"""""""""""""
-nmap <Leader>t :execute "!clear && mix test %\\:" . line(".")<CR>
-nmap <Leader>T :execute "!clear && mix test %"<CR>
+"nmap <Leader>t :execute "!clear && mix test %\\:" . line(".")<CR>
+"nmap <Leader>T :execute "!clear && mix test %"<CR>
