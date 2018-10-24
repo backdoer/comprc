@@ -48,7 +48,6 @@ set noswapfile " Disable .swp files
 set number                     " Show current line number
 "set relativenumber             " Show relative line numbers
 set nowrap
-"set relativenumber
 "set nofoldenable " Enables code folding
 "set foldmethod=syntax
 "set foldlevel=1
