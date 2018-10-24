@@ -28,6 +28,7 @@ Plug 'vim-ruby/vim-ruby' " ruby syntax
 "Plug 'jiangmiao/auto-pairs' " self closing pairs
 Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'kana/vim-submode' " submode
+Plug 'w0rp/ale' " Async Linting
 call plug#end()
 
 """""""""""""""""
@@ -178,6 +179,7 @@ function! TrimWhiteSpace()
   call cursor(l, c)
 endfunction
 autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
+let g:ale_sign_column_always = 1
 
 """""""""""""""""
 """ Navigation
