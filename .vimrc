@@ -117,6 +117,16 @@ let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/my-snippets/UltiS
 """""""""""""""""
 """ FZF
 """""""""""""""""
+" For File search
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l ""'
+" For Ag full text search
+" Default options are --nogroup --column --color
+let s:ag_options = ' --hidden '
+
+let g:fzf_action = {
+	\ 'ctrl-t': 'tab split',
+	\ 'ctrl-space': 'split',
+	\ 'ctrl-v': 'vsplit' }
 let g:fzf_history_dir = '~/.local/share/fzf-history' " Enable per-command history.
 let g:esearch = {'use': 'visual'} " Esearch with visual text
 let g:ag_apply_qmappings=1
@@ -131,19 +141,16 @@ map <leader>f :Ag<CR>
 map <leader><s-f> :Ag!<CR>
 command! -bang -nargs=* Ag
 			\ call fzf#vim#ag(<q-args>,
-			\   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-			\           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-			\   <bang>0) "Ag will show file contents with a preview
+			\   s:ag_options,
+			\  <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+			\          : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+			\  <bang>0)
 
 command! -bang -nargs=* Files
 			\ call fzf#vim#files(<q-args>,
 			\   <bang>0 ? fzf#vim#with_preview('up:60%')
 			\           : fzf#vim#with_preview('right:50%:hidden', '?'),
 			\   <bang>0) "Ag will show file names with a preview
-let g:fzf_action = {
-	\ 'ctrl-t': 'tab split',
-	\ 'ctrl-space': 'split',
-	\ 'ctrl-v': 'vsplit' }
 
 """""""""""""""""
 """ Lightline
