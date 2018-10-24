@@ -3,6 +3,8 @@ filetype off
 call plug#begin('~/.vim/plugged')
 "Plug 'scrooloose/nerdtree' " Directory structure
 "Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
+Plug 'ryanoasis/vim-devicons' " dev icons for vim
+Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim' " Ranger
 Plug 'tpope/vim-vinegar' " Vinegar
 Plug 'itchyny/lightline.vim' " File info at bottom of vim
@@ -21,15 +23,12 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
 Plug 'junegunn/fzf.vim' " Vim plugin for fzf
 Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
-Plug 'ryanoasis/vim-devicons' " dev icons for vim
 Plug 'vim-ruby/vim-ruby' " ruby syntax
 "Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
 "Plug 'jiangmiao/auto-pairs' " self closing pairs
 Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'kana/vim-submode' " submode
 call plug#end()
-
-set shell=bash
 
 """""""""""""""""
 """ Core
@@ -46,7 +45,9 @@ set hidden " allow multiple buffers
 set tabstop=2 " show existing tab with 2 spaces width
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
 set noswapfile " Disable .swp files
-set number
+set number                     " Show current line number
+"set relativenumber             " Show relative line numbers
+set nowrap
 "set relativenumber
 "set nofoldenable " Enables code folding
 "set foldmethod=syntax
@@ -73,20 +74,36 @@ set number
 """""""""""""""""
 """ Ranger
 """""""""""""""""
-let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
+" This is a hack because of the way Ranger closes
+map <leader>0 :syntax on<CR>
+let g:ranger_command_override = 'ranger --cmd="map \% console touch " --cmd="map \$ console mkdir " --cmd="set show_hidden=true"'
+let g:ranger_map_keys = 0
 noremap <leader>n :RangerWorkingDirectory<CR>
 noremap <leader><s-n> :RangerCurrentFile<CR>
-let g:ranger_map_keys = 0
-noremap <leader>t :RangerWorkingDirectoryNewTab<CR>
-noremap <leader><s-t> :RangerCurrentFileNewTab<CR>
+"noremap <leader>t :RangerWorkingDirectoryNewTab<CR>
+"noremap <leader><s-t> :RangerCurrentFileNewTab<CR>
 
 """"""""""""""""""""
 """ Netrw
 """"""""""""""""""""
-noremap <leader>v :vsplit .<CR>
-noremap <leader>x :split .<CR>
-noremap <leader><s-v> :vsplit %:h/<CR>
-noremap <leader><s-x> :split %:h/<CR>
+set splitright
+set splitbelow
+noremap <leader>\ :vsplit .<CR>
+noremap <leader>d :e .<CR>
+noremap <leader>- :split .<CR>
+noremap <leader>t :tabf .<CR>
+noremap <leader>\| :vsplit %:h/<CR>
+noremap <leader>_ :split %:h/<CR>
+noremap <leader><s-d> :E<CR>
+noremap <leader><s-t> :tabf %:h/<CR>
+"noremap <leader>v :vsplit .<CR>
+"noremap <leader>d :e .<CR>
+"noremap <leader>x :split .<CR>
+"noremap <leader>t :tabf .<CR>
+"noremap <leader><s-v> :vsplit %:h/<CR>
+"noremap <leader><s-x> :split %:h/<CR>
+"noremap <leader><s-d> :E<CR>
+"noremap <leader><s-t> :tabf %:h/<CR>
 
 """""""""""""""""
 """ Snippets
@@ -95,7 +112,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/my-snippets/UltiSnips']
-let g:UltiSnipsListSnippets = "<c-r>"
+"let g:UltiSnipsListSnippets = "<c-r>"
 "let g:UltiSnipsExpandTrigger="<tab>"
 
 """""""""""""""""
@@ -105,10 +122,14 @@ let g:fzf_history_dir = '~/.local/share/fzf-history' " Enable per-command histor
 let g:esearch = {'use': 'visual'} " Esearch with visual text
 let g:ag_apply_qmappings=1
 let g:ag_mapping_message=1
-map <leader>p :Files<CR> " Open file finder
-map <leader><s-p> :Files!<CR> " Open file finder full screen
-map <leader>f :Ag<CR> " Ag search full-screen
-map <leader><s-f> :Ag!<CR> " Ag search
+" Open file finder
+map <leader>p :Files<CR>
+" Open file finder full screen
+map <leader><s-p> :Files!<CR>
+" Ag search full-screen
+map <leader>f :Ag<CR>
+" Ag search
+map <leader><s-f> :Ag!<CR>
 command! -bang -nargs=* Ag
 			\ call fzf#vim#ag(<q-args>,
 			\   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
@@ -120,6 +141,10 @@ command! -bang -nargs=* Files
 			\   <bang>0 ? fzf#vim#with_preview('up:60%')
 			\           : fzf#vim#with_preview('right:50%:hidden', '?'),
 			\   <bang>0) "Ag will show file names with a preview
+let g:fzf_action = {
+	\ 'ctrl-t': 'tab split',
+	\ 'ctrl-space': 'split',
+	\ 'ctrl-v': 'vsplit' }
 
 """""""""""""""""
 """ Lightline
@@ -170,6 +195,7 @@ nnoremap <Leader><s-r> :%s/<C-r>0//g<left><left>
 map <C-w>] :bnext<CR>
 map <C-w>[ :bprev<CR>
 map <C-w>x :bd<CR>
+noremap <leader>x :bd<CR>
 map ; :Buffers<CR>
 noremap <leader>q :q<CR>
 noremap <leader>w :w<CR>
@@ -179,19 +205,20 @@ map <leader><s-e> :edit!<CR>
 """"""""""""""""""""
 """ Resizing Windows
 """"""""""""""""""""
-call submode#enter_with('resize', 'n', '', '<leader>+', '<leader>+')
-call submode#enter_with('resize', 'n', '', '<leader>_', '<leader>_')
-call submode#map('resize', 'n', '', '=', ':vertical res +5<CR>')
-call submode#map('resize', 'n', '', '-', ':vertical res -5<CR>')
-call submode#map('resize', 'n', '', '+', ':res +5<CR>')
-call submode#map('resize', 'n', '', '_', ':res -5<CR>')
+let g:submode_timeout=0
+call submode#enter_with('resize', 'n', '', '<c-w>+', '<c-w>+')
+"call submode#enter_with('resize', 'n', '', '<leader>_', '<leader>_')
+call submode#map('resize', 'n', '', 'l', ':vertical res +5<CR>')
+call submode#map('resize', 'n', '', 'h', ':vertical res -5<CR>')
+call submode#map('resize', 'n', '', 'k', ':res +5<CR>')
+call submode#map('resize', 'n', '', 'j', ':res -5<CR>')
 
 """""""""""""""""""""
 """ Quick File Edits
 """""""""""""""""""""
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>ec :vsplit $HOME/comprc<cr>
+nnoremap <leader>ev :tabf $MYVIMRC<cr>
+nnoremap <leader>ec :tabf $HOME/comprc<cr>
 nnoremap <leader>es :UltiSnipsEdit<cr>
 
 """"""""""""""""
