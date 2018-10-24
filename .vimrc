@@ -16,7 +16,7 @@ Plug 'scrooloose/nerdcommenter' " Comment support
 Plug 'pangloss/vim-javascript' " Javascript support for vim
 Plug 'mxw/vim-jsx' " Jsx support for vim
 "Plug 'mattn/emmet-vim' " Html expansion
-"Plug 'tpope/vim-fugitive' " Vim git integration
+Plug 'tpope/vim-fugitive' " Vim git integration
 Plug 'airblade/vim-gitgutter' " Vim gutter integration
 Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
 Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
