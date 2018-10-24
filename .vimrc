@@ -45,8 +45,10 @@ set hidden " allow multiple buffers
 set tabstop=2 " show existing tab with 2 spaces width
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
 set noswapfile " Disable .swp files
-set number                     " Show current line number
-"set relativenumber             " Show relative line numbers
+set number " Show current line number
+"set relativenumber " Show relative line numbers
+set ignorecase " ignore case in search
+set smartcase " honor case if capital present
 set nowrap
 "set nofoldenable " Enables code folding
 "set foldmethod=syntax
@@ -230,5 +232,24 @@ nnoremap <leader>es :UltiSnipsEdit<cr>
 """"""""""""""""
 """ Tests
 """"""""""""""""
-"nmap <Leader>t :execute "!clear && mix test %\\:" . line(".")<CR>
-"nmap <Leader>T :execute "!clear && mix test %"<CR>
+" Default elixir
+nmap <Leader>a :execute "!clear && mix test %\\:" . line(".")<CR>
+nmap <Leader><s-a> :execute "!clear && mix test %"<CR>
+" Ruby
+au FileType ruby call s:ruby_test_bindings()
+function! s:ruby_test_bindings()
+  nmap <Leader>a :execute "!clear && bin/rspec %\\:" . line(".")<cr>
+  nmap <Leader><s-a> :!clear && bin/rspec %<cr>
+endfunction
+" JS
+au FileType javascript call s:js_test_bindings()
+function! s:js_test_bindings()
+  nmap <Leader>a :execute "!clear && npm run test %\\:" . line(".")<cr>
+  nmap <Leader><s-a> :!clear && npm run test %<cr>
+endfunction
+
+""""""""""""""""
+""" Macros
+""""""""""""""""
+"let @[key]='[macro-hash]'
+
