@@ -77,7 +77,7 @@ set nowrap
 """ Ranger
 """""""""""""""""
 " This is a hack because of the way Ranger closes
-map <leader>0 :syntax on<CR>
+noremap <leader>0 :syntax on<CR>
 let g:ranger_command_override = 'ranger --cmd="map \% console touch " --cmd="map \$ console mkdir " --cmd="set show_hidden=true"'
 let g:ranger_map_keys = 0
 noremap <leader>n :RangerWorkingDirectory<CR>
@@ -135,13 +135,13 @@ let g:esearch = {'use': 'visual'} " Esearch with visual text
 let g:ag_apply_qmappings=1
 let g:ag_mapping_message=1
 " Open file finder
-map <leader>p :Files<CR>
+noremap <leader>p :Files<CR>
 " Open file finder full screen
-map <leader><s-p> :Files!<CR>
+noremap <leader><s-p> :Files!<CR>
 " Ag search full-screen
-map <leader>f :Ag<CR>
+noremap <leader>f :Ag<CR>
 " Ag search
-map <leader><s-f> :Ag!<CR>
+noremap <leader><s-f> :Ag!<CR>
 command! -bang -nargs=* Ag
 			\ call fzf#vim#ag(<q-args>,
 			\   s:ag_options,
@@ -168,28 +168,28 @@ function! LightLineFilename()
 endfunction
 set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 
-"""""""""""""""""
-""" Linting
-"""""""""""""""""
-function! TrimWhiteSpace()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  %s/\r//ge
-  call cursor(l, c)
-endfunction
-autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
+""""""""""""""""
+"" Linting
+""""""""""""""""
+"function! TrimWhiteSpace()
+	"let l = line(".")
+	"let c = col(".")
+	"%s/\s\+$//e
+	"%s/\r//ge
+	"call cursor(l, c)
+"endfunction
+"autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
 let g:ale_sign_column_always = 1
 
-"""""""""""""""""
-""" Navigation
-"""""""""""""""""
-map L $
-map H 0
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+""""""""""""""""""
+"""" Navigation
+""""""""""""""""""
+noremap L $
+noremap H 0
+"noremap <C-h> <C-w>h
+"noremap <C-j> <C-w>j
+"noremap <C-k> <C-w>k
+"noremap <C-l> <C-w>l
 
 """""""""""""""""""""""
 """ Search and Replace
@@ -202,15 +202,15 @@ nnoremap <Leader><s-r> :%s/<C-r>0//g<left><left>
 """"""""""""""""""""
 """ Buffers/Windows
 """"""""""""""""""""
-map <C-w>] :bnext<CR>
-map <C-w>[ :bprev<CR>
-map <C-w>x :bd<CR>
+noremap <C-w>] :bnext<CR>
+noremap <C-w>[ :bprev<CR>
+noremap <C-w>x :bd<CR>
 noremap <leader>x :bd<CR>
-map ; :Buffers<CR>
+noremap ; :Buffers<CR>
 noremap <leader>q :q<CR>
 noremap <leader>w :w<CR>
 noremap <leader>e :edit!<CR>
-map <leader><s-e> :edit!<CR>
+noremap <leader><s-e> :edit!<CR>
 
 """"""""""""""""""""
 """ Resizing Windows
@@ -234,20 +234,23 @@ nnoremap <leader>es :UltiSnipsEdit<cr>
 """"""""""""""""
 """ Tests
 """"""""""""""""
-" Default elixir
-nmap <Leader>a :execute "!clear && mix test %\\:" . line(".")<CR>
-nmap <Leader><s-a> :execute "!clear && mix test %"<CR>
+" Elixir
+au FileType elixir call s:elixir_test_bindings()
+function! s:elixir_test_bindings()
+	nnoremap <Leader>a :execute "!clear && mix test %\\:" . line(".")<CR>
+	nnoremap <Leader><s-a> :execute "!clear && mix test %"<CR>
+endfunction
 " Ruby
 au FileType ruby call s:ruby_test_bindings()
 function! s:ruby_test_bindings()
-  nmap <Leader>a :execute "!clear && bin/rspec %\\:" . line(".")<cr>
-  nmap <Leader><s-a> :!clear && bin/rspec %<cr>
+  nnoremap <Leader>a :execute "!clear && bin/rspec %\\:" . line(".")<cr>
+  nnoremap <Leader><s-a> :!clear && bin/rspec %<cr>
 endfunction
 " JS
 au FileType javascript call s:js_test_bindings()
 function! s:js_test_bindings()
-  nmap <Leader>a :execute "!clear && npm run test %\\:" . line(".")<cr>
-  nmap <Leader><s-a> :!clear && npm run test %<cr>
+  nnoremap <Leader>a :execute "!clear && npm run test %\\:" . line(".")<cr>
+  nnoremap <Leader><s-a> :!clear && npm run test %<cr>
 endfunction
 
 """"""""""""""""
