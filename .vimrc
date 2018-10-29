@@ -1,34 +1,34 @@
 filetype off
 
 call plug#begin('~/.vim/plugged')
-"Plug 'scrooloose/nerdtree' " Directory structure
-"Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
-Plug 'ryanoasis/vim-devicons' " dev icons for vim
-Plug 'rbgrouleff/bclose.vim'
-Plug 'francoiscabrol/ranger.vim' " Ranger
-Plug 'tpope/vim-vinegar' " Vinegar
-Plug 'itchyny/lightline.vim' " File info at bottom of vim
-Plug 'SirVer/ultisnips' " Snippet Engine
-Plug 'honza/vim-snippets' " Group of snippets
-Plug 'elixir-editors/vim-elixir' " Elixir support for vim
-"Plug 'slashmili/alchemist.vim' " Elixir support for vim
-Plug 'scrooloose/nerdcommenter' " Comment support
-Plug 'pangloss/vim-javascript' " Javascript support for vim
-Plug 'mxw/vim-jsx' " Jsx support for vim
-"Plug 'mattn/emmet-vim' " Html expansion
-Plug 'tpope/vim-fugitive' " Vim git integration
-Plug 'airblade/vim-gitgutter' " Vim gutter integration
-Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
-Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
-Plug 'junegunn/fzf.vim' " Vim plugin for fzf
-Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
-Plug 'vim-ruby/vim-ruby' " ruby syntax
-"Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
-"Plug 'jiangmiao/auto-pairs' " self closing pairs
-Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
-Plug 'kana/vim-submode' " submode
-Plug 'w0rp/ale' " Async Linting
+	"Plug 'scrooloose/nerdtree' " Directory structure
+	"Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
+	Plug 'ryanoasis/vim-devicons' " dev icons for vim
+	Plug 'rbgrouleff/bclose.vim'
+	Plug 'francoiscabrol/ranger.vim' " Ranger
+	Plug 'tpope/vim-vinegar' " Vinegar
+	Plug 'itchyny/lightline.vim' " File info at bottom of vim
+	Plug 'SirVer/ultisnips' " Snippet Engine
+	Plug 'honza/vim-snippets' " Group of snippets
+	Plug 'elixir-editors/vim-elixir' " Elixir support for vim
+	"Plug 'slashmili/alchemist.vim' " Elixir support for vim
+	Plug 'scrooloose/nerdcommenter' " Comment support
+	Plug 'pangloss/vim-javascript' " Javascript support for vim
+	Plug 'mxw/vim-jsx' " Jsx support for vim
+	"Plug 'mattn/emmet-vim' " Html expansion
+	Plug 'tpope/vim-fugitive' " Vim git integration
+	Plug 'airblade/vim-gitgutter' " Vim gutter integration
+	Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
+	Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
+	Plug 'junegunn/fzf.vim' " Vim plugin for fzf
+	Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
+	Plug 'vim-ruby/vim-ruby' " ruby syntax
+	"Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
+	"Plug 'jiangmiao/auto-pairs' " self closing pairs
+	Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
+	Plug 'kana/vim-submode' " submode
+	Plug 'w0rp/ale' " Async Linting
 call plug#end()
 
 """""""""""""""""
@@ -46,11 +46,12 @@ set hidden " allow multiple buffers
 set tabstop=2 " show existing tab with 2 spaces width
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
 set noswapfile " Disable .swp files
-set number " Show current line number
+let &number=1 " Show current line number (using let syntax just because...)
 "set relativenumber " Show relative line numbers
 set ignorecase " ignore case in search
 set smartcase " honor case if capital present
-set nowrap
+set wrap
+nnoremap <leader><s-w> :set wrap!<cr>
 "set nofoldenable " Enables code folding
 "set foldmethod=syntax
 "set foldlevel=1
@@ -195,9 +196,9 @@ noremap H 0
 """ Search and Replace
 """""""""""""""""""""""
 " Search and replace word under cursor
-nnoremap <Leader>r :%s/<C-r><C-w>//g<left><left>
+nnoremap <Leader>r :%s/<C-r><C-w>//gc<left><left>
 " Search and replace word in clipboard
-nnoremap <Leader><s-r> :%s/<C-r>0//g<left><left>
+nnoremap <Leader><s-r> :%s/<C-r>0//gc<left><left>
 
 """"""""""""""""""""
 """ Buffers/Windows
@@ -237,20 +238,20 @@ nnoremap <leader>es :UltiSnipsEdit<cr>
 " Elixir
 au FileType elixir call s:elixir_test_bindings()
 function! s:elixir_test_bindings()
-	nnoremap <Leader>a :execute "!clear && mix test %\\:" . line(".")<CR>
-	nnoremap <Leader><s-a> :execute "!clear && mix test %"<CR>
+	nnoremap <buffer> <Leader>a :execute "!clear && mix test %\\:" . line(".")<CR>
+	nnoremap <buffer> <Leader><s-a> :execute "!clear && mix test %"<CR>
 endfunction
 " Ruby
 au FileType ruby call s:ruby_test_bindings()
 function! s:ruby_test_bindings()
-  nnoremap <Leader>a :execute "!clear && bin/rspec %\\:" . line(".")<cr>
-  nnoremap <Leader><s-a> :!clear && bin/rspec %<cr>
+  nnoremap <buffer> <Leader>a :execute "!clear && bin/rspec %\\:" . line(".")<cr>
+  nnoremap <buffer> <Leader><s-a> :!clear && bin/rspec %<cr>
 endfunction
 " JS
 au FileType javascript call s:js_test_bindings()
 function! s:js_test_bindings()
-  nnoremap <Leader>a :execute "!clear && npm run test %\\:" . line(".")<cr>
-  nnoremap <Leader><s-a> :!clear && npm run test %<cr>
+  nnoremap <buffer> <Leader>a :execute "!clear && npm run test %\\:" . line(".")<cr>
+  nnoremap <buffer> <Leader><s-a> :!clear && npm run test %<cr>
 endfunction
 
 """"""""""""""""
@@ -258,3 +259,13 @@ endfunction
 """"""""""""""""
 "let @[key]='[macro-hash]'
 
+""""""""""""""""
+""" Movements
+""""""""""""""""
+onoremap p i(
+onoremap l i[
+onoremap c i{
+onoremap ' i'
+onoremap " i"
+onoremap t it
+onoremap < i<
