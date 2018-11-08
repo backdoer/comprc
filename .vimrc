@@ -79,7 +79,7 @@ nnoremap <leader><s-w> :set wrap!<cr>
 """""""""""""""""
 " This is a hack because of the way Ranger closes
 noremap <leader>0 :syntax on<CR>
-let g:ranger_command_override = 'ranger --cmd="map \% console touch " --cmd="map \$ console mkdir " --cmd="set show_hidden=true"'
+let g:ranger_command_override = 'ranger --cmd="unmap a" --cmd="map R rename_append"  --cmd="map D console mkdir " --cmd="map \% console touch " --cmd="set show_hidden=true"'
 let g:ranger_map_keys = 0
 noremap <leader>n :RangerWorkingDirectory<CR>
 noremap <leader><s-n> :RangerCurrentFile<CR>
@@ -181,6 +181,8 @@ set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 "endfunction
 "autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
 let g:ale_sign_column_always = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
 
 """"""""""""""""""
 """" Navigation
@@ -196,9 +198,9 @@ noremap H 0
 """ Search and Replace
 """""""""""""""""""""""
 " Search and replace word under cursor
-nnoremap <Leader>r :%s/<C-r><C-w>//gc<left><left>
+nnoremap <Leader>r :%s/<C-r><C-w>//gc<left><left><left>
 " Search and replace word in clipboard
-nnoremap <Leader><s-r> :%s/<C-r>0//gc<left><left>
+nnoremap <Leader><s-r> :%s/<C-r>0//gc<left><left><left>
 
 """"""""""""""""""""
 """ Buffers/Windows
@@ -267,5 +269,5 @@ onoremap l i[
 onoremap c i{
 onoremap ' i'
 onoremap " i"
-onoremap t it
-onoremap < i<
+onoremap h it
+"onoremap < i<
