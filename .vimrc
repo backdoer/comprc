@@ -1,6 +1,7 @@
 filetype off
 
 call plug#begin('~/.vim/plugged')
+
 "Plug 'scrooloose/nerdtree' " Directory structure
 "Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
 Plug 'ryanoasis/vim-devicons' " dev icons for vim
@@ -8,7 +9,7 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim' " Ranger
 Plug 'tpope/vim-vinegar' " Vinegar
 Plug 'itchyny/lightline.vim' " File info at bottom of vim
-"Plug 'SirVer/ultisnips' " Snippet Engine
+Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
 Plug 'elixir-editors/vim-elixir' " Elixir support for vim
 "Plug 'slashmili/alchemist.vim' " Elixir support for vim
@@ -46,11 +47,12 @@ set hidden " allow multiple buffers
 set tabstop=2 " show existing tab with 2 spaces width
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
 set noswapfile " Disable .swp files
-set number " Show current line number
+let &number=1 " Show current line number (using let syntax just because...)
 "set relativenumber " Show relative line numbers
 set ignorecase " ignore case in search
 set smartcase " honor case if capital present
-set nowrap
+set wrap
+nnoremap <leader><s-w> :set wrap!<cr>
 "set nofoldenable " Enables code folding
 "set foldmethod=syntax
 "set foldlevel=1
@@ -65,9 +67,9 @@ set nowrap
 "let g:NERDTreeMapJumpNextSibling="" " To allow tmux/vim navigation
 "let NERDTreeShowHidden=1 " Display ignored files in NERDTree
 "autocmd bufenter * if (winnr("$") == 1
-			"\ && exists("b:NERDTree")
-			"\ && b:NERDTree.isTabTree())
-			"\ | q | endif " Automatically close vim if NERDTree is only buffer left
+"\ && exists("b:NERDTree")
+"\ && b:NERDTree.isTabTree())
+"\ | q | endif " Automatically close vim if NERDTree is only buffer left
 "autocmd VimEnter * NERDTree " Automatically start NERDTree on open
 "let g:NERDTreeWinSize=40
 "map <leader>n :NERDTreeToggle<CR>
@@ -77,8 +79,8 @@ set nowrap
 """ Ranger
 """""""""""""""""
 " This is a hack because of the way Ranger closes
-map <leader>0 :syntax on<CR>
-let g:ranger_command_override = 'ranger --cmd="map \% console touch " --cmd="map \$ console mkdir " --cmd="set show_hidden=true"'
+noremap <leader>0 :syntax on<CR>
+let g:ranger_command_override = 'ranger --cmd="unmap a" --cmd="map R rename_append"  --cmd="map D console mkdir " --cmd="map \% console touch " --cmd="set show_hidden=true"'
 let g:ranger_map_keys = 0
 noremap <leader>n :RangerWorkingDirectory<CR>
 noremap <leader><s-n> :RangerCurrentFile<CR>
@@ -127,21 +129,21 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l ""'
 let s:ag_options = ' --hidden '
 
 let g:fzf_action = {
-	\ 'ctrl-t': 'tab split',
-	\ 'ctrl-space': 'split',
-	\ 'ctrl-v': 'vsplit' }
+			\ 'ctrl-t': 'tab split',
+			\ 'ctrl-space': 'split',
+			\ 'ctrl-v': 'vsplit' }
 let g:fzf_history_dir = '~/.local/share/fzf-history' " Enable per-command history.
 let g:esearch = {'use': 'visual'} " Esearch with visual text
 let g:ag_apply_qmappings=1
 let g:ag_mapping_message=1
 " Open file finder
-map <leader>p :Files<CR>
+noremap <leader>p :Files<CR>
 " Open file finder full screen
-map <leader><s-p> :Files!<CR>
+noremap <leader><s-p> :Files!<CR>
 " Ag search full-screen
-map <leader>f :Ag<CR>
+noremap <leader>f :Ag<CR>
 " Ag search
-map <leader><s-f> :Ag!<CR>
+noremap <leader><s-f> :Ag!<CR>
 command! -bang -nargs=* Ag
 			\ call fzf#vim#ag(<q-args>,
 			\   s:ag_options,
@@ -159,58 +161,60 @@ command! -bang -nargs=* Files
 """ Lightline
 """""""""""""""""
 let g:lightline = {
-      \ 'component_function': {
-      \   'filename': 'LightLineFilename'
-      \ }
-      \ }
+			\ 'component_function': {
+			\   'filename': 'LightLineFilename'
+			\ }
+			\ }
 function! LightLineFilename()
-  return expand('%')
+	return expand('%')
 endfunction
 set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 
-"""""""""""""""""
-""" Linting
-"""""""""""""""""
-function! TrimWhiteSpace()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  %s/\r//ge
-  call cursor(l, c)
-endfunction
-autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
+""""""""""""""""
+"" Linting
+""""""""""""""""
+"function! TrimWhiteSpace()
+"let l = line(".")
+"let c = col(".")
+"%s/\s\+$//e
+"%s/\r//ge
+"call cursor(l, c)
+"endfunction
+"autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
 let g:ale_sign_column_always = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
 
-"""""""""""""""""
-""" Navigation
-"""""""""""""""""
-map L $
-map H 0
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+""""""""""""""""""
+"""" Navigation
+""""""""""""""""""
+noremap L $
+noremap H 0
+"noremap <C-h> <C-w>h
+"noremap <C-j> <C-w>j
+"noremap <C-k> <C-w>k
+"noremap <C-l> <C-w>l
 
 """""""""""""""""""""""
 """ Search and Replace
 """""""""""""""""""""""
 " Search and replace word under cursor
-nnoremap <Leader>r :%s/<C-r><C-w>//g<left><left>
+nnoremap <Leader>r :%s/<C-r><C-w>//gc<left><left><left>
 " Search and replace word in clipboard
-nnoremap <Leader><s-r> :%s/<C-r>0//g<left><left>
+nnoremap <Leader><s-r> :%s/<C-r>0//gc<left><left><left>
 
 """"""""""""""""""""
 """ Buffers/Windows
 """"""""""""""""""""
-map <C-w>] :bnext<CR>
-map <C-w>[ :bprev<CR>
-map <C-w>x :bd<CR>
+noremap <C-w>] :bnext<CR>
+noremap <C-w>[ :bprev<CR>
+noremap <C-w>x :bd<CR>
 noremap <leader>x :bd<CR>
-map ; :Buffers<CR>
+noremap ; :Buffers<CR>
 noremap <leader>q :q<CR>
 noremap <leader>w :w<CR>
 noremap <leader>e :edit!<CR>
-map <leader><s-e> :edit!<CR>
+noremap <leader><s-e> :edit!<CR>
 
 """"""""""""""""""""
 """ Resizing Windows
@@ -234,20 +238,23 @@ nnoremap <leader>es :UltiSnipsEdit<cr>
 """"""""""""""""
 """ Tests
 """"""""""""""""
-" Default elixir
-nmap <Leader>a :execute "!clear && mix test %\\:" . line(".")<CR>
-nmap <Leader><s-a> :execute "!clear && mix test %"<CR>
+" Elixir
+au FileType elixir call s:elixir_test_bindings()
+function! s:elixir_test_bindings()
+	nnoremap <buffer> <Leader>a :execute "!clear && mix test %\\:" . line(".")<CR>
+	nnoremap <buffer> <Leader><s-a> :execute "!clear && mix test %"<CR>
+endfunction
 " Ruby
 au FileType ruby call s:ruby_test_bindings()
 function! s:ruby_test_bindings()
-  nmap <Leader>a :execute "!clear && bin/rspec %\\:" . line(".")<cr>
-  nmap <Leader><s-a> :!clear && bin/rspec %<cr>
+	nnoremap <buffer> <Leader>a :execute "!clear && bin/rspec %\\:" . line(".")<cr>
+	nnoremap <buffer> <Leader><s-a> :!clear && bin/rspec %<cr>
 endfunction
 " JS
 au FileType javascript call s:js_test_bindings()
 function! s:js_test_bindings()
-  nmap <Leader>a :execute "!clear && npm run test %\\:" . line(".")<cr>
-  nmap <Leader><s-a> :!clear && npm run test %<cr>
+	nnoremap <buffer> <Leader>a :execute "!clear && npm run test %\\:" . line(".")<cr>
+	nnoremap <buffer> <Leader><s-a> :!clear && npm run test %<cr>
 endfunction
 
 """"""""""""""""
@@ -255,3 +262,13 @@ endfunction
 """"""""""""""""
 "let @[key]='[macro-hash]'
 
+""""""""""""""""
+""" Movements
+""""""""""""""""
+onoremap p i(
+onoremap l i[
+onoremap c i{
+onoremap ' i'
+onoremap " i"
+onoremap h it
+"onoremap < i<
