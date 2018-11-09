@@ -95,9 +95,17 @@ get_latest_package () { asdf list-all $1 | egrep '^[^a-zA-Z]+$' | sed -Ee 's/^(.
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias gc="git commit -m"
 alias go="git checkout"
 alias gs="git status"
+alias gph="git push heroku master"
+function gc() {
+	if [ "$1" != "" ] # or better, if [ -n "$1" ]
+	then
+		git commit -m "$1"
+	else
+		git commit -m update
+	fi
+}
 
 function send() {
 	git add .

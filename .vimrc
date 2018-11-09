@@ -9,7 +9,7 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim' " Ranger
 Plug 'tpope/vim-vinegar' " Vinegar
 Plug 'itchyny/lightline.vim' " File info at bottom of vim
-Plug 'SirVer/ultisnips' " Snippet Engine
+"Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
 Plug 'elixir-editors/vim-elixir' " Elixir support for vim
 "Plug 'slashmili/alchemist.vim' " Elixir support for vim
