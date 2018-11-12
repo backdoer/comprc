@@ -59,7 +59,7 @@ ZSH_THEME="hyperzsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-git zsh-autosuggestions brew osx zsh-syntax-highlighting
+	git zsh-autosuggestions brew osx zsh-syntax-highlighting colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -94,10 +94,19 @@ get_latest_package () { asdf list-all $1 | egrep '^[^a-zA-Z]+$' | sed -Ee 's/^(.
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#Docker
+alias dc="docker-compose"
+alias d="docker"
 
+alias ls='ls -GF'
+
+# Git
 alias go="git checkout"
 alias gs="git status"
 alias gph="git push heroku master"
+alias gpm="git pull origin master"
+
+
 function gc() {
 	if [ "$1" != "" ] # or better, if [ -n "$1" ]
 	then
@@ -126,7 +135,6 @@ export PATH="/usr/local/Cellar/rabbitmq/3.7.7_1/sbin:$PATH"
 . $HOME/.asdf/asdf.sh
 
 . $HOME/.asdf/completions/asdf.bash
-export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

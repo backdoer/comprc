@@ -9,7 +9,7 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim' " Ranger
 Plug 'tpope/vim-vinegar' " Vinegar
 Plug 'itchyny/lightline.vim' " File info at bottom of vim
-"Plug 'SirVer/ultisnips' " Snippet Engine
+Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
 Plug 'elixir-editors/vim-elixir' " Elixir support for vim
 "Plug 'slashmili/alchemist.vim' " Elixir support for vim
@@ -30,6 +30,8 @@ Plug 'vim-ruby/vim-ruby' " ruby syntax
 Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'kana/vim-submode' " submode
 Plug 'w0rp/ale' " Async Linting
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
 call plug#end()
 
 """""""""""""""""
@@ -112,10 +114,10 @@ noremap <leader><s-t> :tabf %:h/<CR>
 """""""""""""""""
 """ Snippets
 """""""""""""""""
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-"let g:UltiSnipsEditSplit="vertical"
-":qlet g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/my-snippets/UltiSnips']
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/my-snippets/UltiSnips']
 "let g:UltiSnipsListSnippets = "<c-r>"
 "let g:UltiSnipsExpandTrigger="<tab>"
 
