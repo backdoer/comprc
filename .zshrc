@@ -99,7 +99,9 @@ alias dc="docker-compose"
 alias d="docker"
 
 alias ls='ls -GF'
-
+alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
+alias cdw='foo(){ cd ~/workspace/"$1"}; foo '
+alias newf='foo(){mkdir "$1"; vim "$1"/"$2"}; foo '
 # Git
 alias go="git checkout"
 alias gs="git status"
