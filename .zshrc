@@ -7,7 +7,7 @@ export EDITOR='vim'
 # Set name of the theme to load. Optionally, if you set this to "random"
 	# it'll load a random theme each time that oh-my-zsh is loaded.
 	# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-	ZSH_THEME="spaceship"
+	ZSH_THEME="hyperzsh"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -100,10 +100,11 @@ get_latest_package () { asdf list-all $1 | egrep '^[^a-zA-Z]+$' | sed -Ee 's/^(.
 
 	alias ls='ls -GF'
 	alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
-	alias cdw='foo(){ cd ~/workspace/"$1"}; foo '
+	alias cdw='foo(){ cd ~/Desktop/workspace/"$1"}; foo '
 	alias newf='foo(){mkdir "$1"; vim "$1"/"$2"}; foo '
 
 	alias podium='tmuxinator start podium'
+	alias dev='tmuxinator start home'
 	alias podium-edit='tmuxinator open podium'
 # Git
 alias go="git checkout"
@@ -175,6 +176,17 @@ training-api(){
 	gpm
 	iex -S mix phx.server
 }
+new_client(){
+	cdw new_app_client
+	gpm
+	npm start
+}
+new_api(){
+	cdw new_app_api
+	gpm
+	iex -S mix phx.server
+}
+
 
 function gc() {
 	if [ "$1" != "" ] # or better, if [ -n "$1" ]
