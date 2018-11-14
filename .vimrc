@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'SirVer/ultisnips' " Snippet Engine
 	Plug 'honza/vim-snippets' " Group of snippets
 	Plug 'elixir-editors/vim-elixir' " Elixir support for vim
-	"Plug 'slashmili/alchemist.vim' " Elixir support for vim
+	Plug 'slashmili/alchemist.vim' " Elixir support for vim
 	Plug 'scrooloose/nerdcommenter' " Comment support
 	Plug 'pangloss/vim-javascript' " Javascript support for vim
 	Plug 'mxw/vim-jsx' " Jsx support for vim
@@ -31,9 +31,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'w0rp/ale' " Async Linting
 call plug#end()
 
-"""""""""""""""""
-""" Core
-"""""""""""""""""
+""""""""""""""""""
+"""" Core
+""""""""""""""""""
 syntax on
 colorscheme onedark " theme
 set re=1 " This uses a different regex engine more suited for ruby
@@ -66,17 +66,17 @@ nnoremap <leader><s-w> :set wrap!<cr>
 "let g:NERDTreeMapJumpNextSibling="" " To allow tmux/vim navigation
 "let NERDTreeShowHidden=1 " Display ignored files in NERDTree
 "autocmd bufenter * if (winnr("$") == 1
-			"\ && exists("b:NERDTree")
-			"\ && b:NERDTree.isTabTree())
-			"\ | q | endif " Automatically close vim if NERDTree is only buffer left
+     "\ && exists("b:NERDTree")
+     "\ && b:NERDTree.isTabTree())
+     "\ | q | endif " Automatically close vim if NERDTree is only buffer left
 "autocmd VimEnter * NERDTree " Automatically start NERDTree on open
 "let g:NERDTreeWinSize=40
 "map <leader>n :NERDTreeToggle<CR>
 "map <leader><s-n> :NERDTreeFind<CR>
 
-"""""""""""""""""
-""" Ranger
-"""""""""""""""""
+""""""""""""""""
+"" Ranger
+""""""""""""""""
 " This is a hack because of the way Ranger closes
 noremap <leader>0 :syntax on<CR>
 let g:ranger_command_override = 'ranger --cmd="unmap a" --cmd="map R rename_append"  --cmd="map D console mkdir " --cmd="map \% console touch " --cmd="set show_hidden=true"'
@@ -180,9 +180,10 @@ set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 	"call cursor(l, c)
 "endfunction
 "autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
+let g:ale_linters = { 'elixir': ['dialyxir'] }
 let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
+let g:ale_fixers = { 'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop'] }
 
 """"""""""""""""""
 """" Navigation
@@ -240,8 +241,8 @@ nnoremap <leader>es :UltiSnipsEdit<cr>
 " Elixir
 au FileType elixir call s:elixir_test_bindings()
 function! s:elixir_test_bindings()
-	nnoremap <buffer> <Leader>a :execute "!clear && mix test %\\:" . line(".")<CR>
-	nnoremap <buffer> <Leader><s-a> :execute "!clear && mix test %"<CR>
+  nnoremap <buffer> <Leader>a :execute "!clear && mix test %\\:" . line(".")<CR>
+  nnoremap <buffer> <Leader><s-a> :execute "!clear && mix test %"<CR>
 endfunction
 " Ruby
 au FileType ruby call s:ruby_test_bindings()
