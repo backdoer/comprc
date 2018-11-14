@@ -1,7 +1,9 @@
 #!/bin/bash
 ############################
 # .make.sh
-# This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
+# This script will install all dependencies, 
+# move the existing configuration files into a /old_comprc directory, 
+# and symlink the configuration files into the home directory.
 ############################
 
 ########## Variables
