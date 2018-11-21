@@ -97,7 +97,7 @@ noremap <leader>- :split .<CR>
 noremap <leader>t :tabf .<CR>
 noremap <leader>\| :vsplit %:h/<CR>
 noremap <leader>_ :split %:h/<CR>
-noremap <leader><s-d> :E<CR>
+noremap <leader><s-d> :Explore<CR>
 noremap <leader><s-t> :tabf %:h/<CR>
 "noremap <leader>v :vsplit .<CR>
 "noremap <leader>d :e .<CR>
@@ -188,8 +188,15 @@ let g:ale_fixers = { 'elixir': ['mix_format'], 'javascript': ['prettier', 'eslin
 """"""""""""""""""
 """" Navigation
 """"""""""""""""""
+" Horizontal
 noremap L $
 noremap H 0
+" Go through changelist. Also remember <C-o> & <C-i> for going through jumplist
+nnoremap <C-f> g,
+nnoremap <C-b> g;
+" Tabs
+nnoremap <C-n> gt
+nnoremap <C-p> gT
 "noremap <C-h> <C-w>h
 "noremap <C-j> <C-w>j
 "noremap <C-k> <C-w>k
@@ -272,3 +279,54 @@ onoremap ' i'
 onoremap " i"
 onoremap h it
 "onoremap < i<
+
+""""""""""""""""""""
+""" Move Text Blocks
+""""""""""""""""""""
+" Normal mode
+"nnoremap <leader>j :m .+1<CR>==
+"nnoremap <leader>k :m .-2<CR>==
+
+"" Insert mode
+inoremap <C-j> <ESC>:m .+1<CR>==gi
+inoremap <C-k> <ESC>:m .-2<CR>==gi
+
+"" Visual mode
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
+"""""""""""""""""""""""
+""" Things to Remember
+"""""""""""""""""""""""
+" run bash command
+" :! [bash command]
+"
+" run bash command with output printed into file
+" :.! [bash command] 
+"
+" takes file back in time
+" :earlier 15m 
+"
+" reverses earlier command
+" :later 15m
+"
+" edit permissioned file
+" :w !sudo tee %
+"
+" reselects last visual selection
+" gv
+"
+" create HTML render of current file
+" :%TOhtml
+"
+" open up html of website
+" vim http://stackoverflow.com/
+"
+" Set bookmark
+" m [char]
+"
+" Go to bookmark
+" ' [char]
+"
+" Multiple Clipboards
+" " [char] [operation]
