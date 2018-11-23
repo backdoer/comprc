@@ -16,7 +16,7 @@ Plug 'elixir-editors/vim-elixir' " Elixir support for vim
 Plug 'scrooloose/nerdcommenter' " Comment support
 Plug 'pangloss/vim-javascript' " Javascript support for vim
 Plug 'mxw/vim-jsx' " Jsx support for vim
-"Plug 'mattn/emmet-vim' " Html expansion
+Plug 'mattn/emmet-vim' " Html expansion
 Plug 'tpope/vim-fugitive' " Vim git integration
 Plug 'airblade/vim-gitgutter' " Vim gutter integration
 Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
@@ -26,10 +26,10 @@ Plug 'junegunn/fzf.vim' " Vim plugin for fzf
 Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
 Plug 'vim-ruby/vim-ruby' " ruby syntax
 "Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
-"Plug 'jiangmiao/auto-pairs' " self closing pairs
+Plug 'jiangmiao/auto-pairs' " self closing pairs
 Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'kana/vim-submode' " submode
-Plug 'w0rp/ale' " Async Linting
+"Plug 'w0rp/ale' " Async Linting
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 call plug#end()

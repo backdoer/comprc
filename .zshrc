@@ -100,7 +100,7 @@ get_latest_package () { asdf list-all $1 | egrep '^[^a-zA-Z]+$' | sed -Ee 's/^(.
 
 	alias ls='ls -GF'
 	alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
-	alias cdw='foo(){ cd ~/Desktop/workspace/"$1"}; foo '
+	alias cdw='foo(){ cd ~/workspace/"$1"}; foo '
 	alias newf='foo(){mkdir "$1"; vim "$1"/"$2"}; foo '
 
 	alias podium='tmuxinator start podium'
@@ -219,3 +219,7 @@ export PATH="/usr/local/Cellar/rabbitmq/3.7.7_1/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 source ~/.bin/tmuxinator.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
