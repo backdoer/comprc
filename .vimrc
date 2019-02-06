@@ -26,11 +26,12 @@ Plug 'junegunn/fzf.vim' " Vim plugin for fzf
 Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
 Plug 'vim-ruby/vim-ruby' " ruby syntax
 "Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
-Plug 'jiangmiao/auto-pairs' " self closing pairs
+"Plug 'jiangmiao/auto-pairs' " self closing pairs
 Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'kana/vim-submode' " submode
-"Plug 'w0rp/ale' " Async Linting
+Plug 'w0rp/ale' " Async Linting
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'terryma/vim-multiple-cursors' " Multi Cursors
 
 call plug#end()
 
@@ -274,3 +275,16 @@ onoremap ' i'
 onoremap " i"
 onoremap h it
 "onoremap < i<
+"
+"""""""""""""""""""""
+""" MULTI CURSOR
+"""""""""""""""""""""
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+let g:multi_cursor_exit_from_visual_mode=0
+let g:multi_cursor_exit_from_insert_mode=0
+

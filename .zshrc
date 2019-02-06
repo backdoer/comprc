@@ -5,9 +5,9 @@
 export ZSH=/Users/brianbolnick/.oh-my-zsh
 export EDITOR='vim'
 # Set name of the theme to load. Optionally, if you set this to "random"
-	# it'll load a random theme each time that oh-my-zsh is loaded.
-	# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-	ZSH_THEME="hyperzsh"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="hyperzsh"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -90,58 +90,83 @@ get_latest_package () { asdf list-all $1 | egrep '^[^a-zA-Z]+$' | sed -Ee 's/^(.
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-	#
-	# Example aliases
-	# alias zshconfig="mate ~/.zshrc"
-	# alias ohmyzsh="mate ~/.oh-my-zsh"
-	#Docker
-	alias dc="docker-compose"
-	alias d="docker"
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+#Docker
+alias dc="docker-compose"
+alias d="docker"
 
-	alias ls='ls -GF'
-	alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
-	alias cdw='foo(){ cd ~/workspace/"$1"}; foo '
-	alias newf='foo(){mkdir "$1"; vim "$1"/"$2"}; foo '
+alias ls='ls -GF'
+alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
+alias cdw='foo(){ cd ~/workspace/"$1"}; foo '
+alias pid='foo(){ lsof -nP -i4TCP:"$1" | grep LISTEN }; foo'
+alias newf='foo(){mkdir "$1"; vim "$1"/"$2"}; foo '
 
-	alias podium='tmuxinator start podium'
-	alias dev='tmuxinator start home'
-	alias podium-edit='tmuxinator open podium'
+alias podium='tmuxinator start podium'
+alias dev='tmuxinator start home'
+alias podium-edit='tmuxinator open podium'
 # Git
 alias go="git checkout"
 alias gs="git status"
 alias gph="git push heroku master"
 alias gpm="git pull origin master"
-
+alias gp="git pull"
 #Podium Aliases
 bm(){
 	cdw black_mamba
-  gpm
+  git pull
 	source .env
 	mix deps.get
 	mix phoenix.server
 }
+mk(){
+	cdw magic
+  git pull
+	source .env
+	mix deps.get
+	mix phx.server
+}
+pi(){
+	cdw podium-ui
+	git pull
+	npm install
+	npm run storybook
+}
+pc(){
+	cdw podium-charts
+	git pull
+	npm install
+	npm run storybook
+}
+ngrok(){
+	cd
+	./ngrok http --subdomain bolnick-mamba 4000
+}
 ka(){
 	cdw kazaam
-	gpm
-	npm install
-	npm start
+	git pull
+	source .env
+	yarn install
+	yarn start
 }
 db(){
 	cdw dashboard-frontend
-	gpm
+	git pull
 	npm install
 	nf start dev
 }
 sc(){
 	cdw stormcrow
-  gpm
+  git pull
 	mix deps.get
 	npm install
 	mix phoenix.server
 }
 rr(){
 	cdw review_rocket
-	gpm
+	git pull
 	bundle install
 	rake db:migrate
 	lsof -i:3000 | awk '{if(NR>1) print $2}' |  while read line; do kill -9 $line; done
@@ -149,41 +174,42 @@ rr(){
 }
 rp(){
 	cdw rapidash
-	gpm
+	git pull
 	npm install
 	mix deps.get
 	mix phoenix.server
 }
 sn(){
 	cdw snowden
-	gpm
+	git pull
+	source .env
 	mix deps.get
 	iex -S mix phx.server
 }
 ph(){
 	cdw phyllis
-	gpm
+	git pull
 	mix deps.get
 	iex -S mix phoenix.server
 }
 training-client(){
 	cdw training/elixir_training_client
-	gpm
+	git pull
 	npm start
 }
 training-api(){
 	cdw training/elixir_training_api
-	gpm
+	git pull
 	iex -S mix phx.server
 }
 new_client(){
 	cdw new_app_client
-	gpm
+	git pull
 	npm start
 }
 new_api(){
 	cdw new_app_api
-	gpm
+	git pull
 	iex -S mix phx.server
 }
 
@@ -205,7 +231,7 @@ function send() {
 	else
 		git commit -m update
 	fi
-	git push
+	git push -u origin HEAD
 }
 
 autoload -U promptinit; promptinit
@@ -223,3 +249,7 @@ source ~/.bin/tmuxinator.zsh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
