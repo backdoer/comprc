@@ -103,6 +103,7 @@ alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 alias cdw='foo(){ cd ~/workspace/"$1"}; foo '
 alias pid='foo(){ lsof -nP -i4TCP:"$1" | grep LISTEN }; foo'
 alias newf='foo(){mkdir "$1"; vim "$1"/"$2"}; foo '
+alias tattach='foo(){tmux a -t "$1"}; foo'
 
 alias podium='tmuxinator start podium'
 alias dev='tmuxinator start home'
@@ -192,26 +193,37 @@ ph(){
 	mix deps.get
 	iex -S mix phoenix.server
 }
-training-client(){
-	cdw training/elixir_training_client
-	git pull
-	npm start
+wclient(){
+	cdw training/hippo_client
+	gpm
+	yarn start
 }
-training-api(){
-	cdw training/elixir_training_api
-	git pull
+wserver(){
+	cdw training/hippo_api
+	gpm
 	iex -S mix phx.server
 }
-new_client(){
-	cdw new_app_client
-	git pull
-	npm start
+wnative(){
+	cdw training/hippo_native
+	gpm
+	yarn start
 }
-new_api(){
-	cdw new_app_api
-	git pull
+client(){
+	cdw hippo_client
+	gpm
+	yarn start
+}
+server(){
+	cdw hippo_api
+	gpm
 	iex -S mix phx.server
 }
+native(){
+	cd local_dev/hippo_native
+	gpm
+	yarn start
+}
+
 
 
 function gc() {
