@@ -187,6 +187,13 @@ sn(){
 	mix deps.get
 	iex -S mix phx.server
 }
+hb(){
+	cdw halberd
+	gpm
+	source .env
+	mix deps.get
+	iex -S mix phx.server
+}
 ph(){
 	cdw phyllis
 	git pull
