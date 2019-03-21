@@ -245,7 +245,7 @@ function gc() {
 }
 
 function send() {
-	git add .
+	git add --patch
 	if [ "$1" != "" ] # or better, if [ -n "$1" ]
 	then
 		git commit -m "$1"
@@ -255,7 +255,7 @@ function send() {
 	git push -u origin HEAD
 }
 function sendp() {
-	git add .
+	git add --patch
 	if [ "$1" != "" ] # or better, if [ -n "$1" ]
 	then
 		git commit -m "$1"
