@@ -101,6 +101,7 @@ alias d="docker"
 alias ls='ls -GF'
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 alias cdw='foo(){ cd ~/workspace/"$1"}; foo '
+alias rage='foo(){ rm -rf "$1"}; foo'
 alias pid='foo(){ lsof -nP -i4TCP:"$1" | grep LISTEN }; foo'
 alias newf='foo(){mkdir "$1"; vim "$1"/"$2"}; foo '
 alias tattach='foo(){tmux a -t "$1"}; foo'
@@ -283,3 +284,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+source /Users/brianbolnick/comprc/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
