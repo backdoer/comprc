@@ -45,6 +45,8 @@ gd(){
   git branch -d $1
 }
 
+alias gdbr="git branch | grep -v "master" | xargs git branch -d"
+
 # directories
 alias ls='ls -GFh'
 

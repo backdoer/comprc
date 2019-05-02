@@ -29,6 +29,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 	Plug 'kana/vim-submode' " submode
 	Plug 'w0rp/ale' " Async Linting
+	Plug 'tpope/vim-abolish' " String case coercion
+	Plug 'chiedo/vim-case-convert'
+	Plug 'leafgarland/typescript-vim' " Typescript support
 call plug#end()
 
 """"""""""""""""""
@@ -97,6 +100,7 @@ noremap <leader>- :split .<CR>
 noremap <leader>t :tabf .<CR>
 noremap <leader>\| :vsplit %:h/<CR>
 noremap <leader>_ :split %:h/<CR>
+noremap <leader><s-b> :tabnew <CR>
 noremap <leader><s-d> :Explore<CR>
 noremap <leader><s-t> :tabf %:h/<CR>
 "noremap <leader>v :vsplit .<CR>
@@ -182,7 +186,7 @@ set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 "autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
 let g:ale_linters = { 'elixir': ['dialyxir'] }
 let g:ale_sign_column_always = 1
-let g:ale_fix_on_save = 1
+"let g:ale_fix_on_save = 1
 let g:ale_fixers = { 'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop'] }
 
 """"""""""""""""""
@@ -261,13 +265,30 @@ endfunction
 au FileType javascript call s:js_test_bindings()
 function! s:js_test_bindings()
   nnoremap <buffer> <Leader>a :execute "!clear && npm run test %\\:" . line(".")<cr>
-  nnoremap <buffer> <Leader><s-a> :!clear && npm run test %<cr>
+  nnoremap <buffer> <Leader><s-a> :!clear && npm run test %<cr>,
 endfunction
+
+"""""""""""""""""""
+""" Transformations
+"""""""""""""""""""
+" Elixir
+au FileType elixir call s:elixir_transformation_bindings()
+function! s:elixir_transformation_bindings()
+    " Switch string map to atom map
+    vnoremap <S-a> :s/"\([a-z_0-9]*\)" =>/\=submatch(1).':'/g<CR>
+    " Switch atom map to string map
+    vnoremap <S-s> :s/\([a-z_0-9]*\):/\='"'.submatch(1).'" =>'/g<CR>
+endfunction
+
+vnoremap crs :CamelToSnakeSel!<CR>
+vnoremap crc :SnakeToCamelSel!<CR>
 
 """"""""""""""""
 """ Macros
 """"""""""""""""
 "let @[key]='[macro-hash]'
+" Commatize
+let @c="Ea,\<Esc>ll"
 
 """"""""""""""""
 """ Movements
@@ -330,3 +351,5 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 "
 " Multiple Clipboards
 " " [char] [operation]
+"
+"
