@@ -46,7 +46,7 @@ set backspace=2 " make backspace work like most other programs
 set incsearch " Allow incremental search
 set autoread " Auto-reload changed files
 set hidden " allow multiple buffers
-set tabstop=2 " show existing tab with 2 spaces width
+"set tabstop=2 " show existing tab with 2 spaces width
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
 set noswapfile " Disable .swp files
 let &number=1 " Show current line number (using let syntax just because...)
