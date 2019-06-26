@@ -10,38 +10,38 @@
 
 dir=~/comprc                                # dotfiles directory
 olddir=~/comprc_old                         # old dotfiles backup directory
-files="bashrc zshrc vimrc vim tmux.conf"    # list of files/folders to symlink in homedir
+files="bashrc zshrc vimrc vim tmux.conf alacritty.yml"    # list of files/folders to symlink in homedir
 
 ##########
 
-echo "Installing OS Dependencies"
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  sudo apt-get install zsh
-  sudo apt-get install silversearcher-ag
-  # package to compare floating point numbers
-  sudo apt-get install bc
-  sudo apt-get install tmux
-  sudo apt-get install fortune
-  sudo apt-get install cowsay
-  sudo apt-get install vim
-  sudo apt-get install ranger
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  brew install zsh
-  brew install ag
-  # package to compare floating point numbers
-  brew install bc
-  brew install tmux
-  brew install fortune
-  brew install cowsay
-  brew install ranger
-  brew install macvim && brew link macvim
-fi
-echo "Finished Installing OS Dependencies"
+#echo "Installing OS Dependencies"
+#if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  #sudo apt-get install zsh
+  #sudo apt-get install silversearcher-ag
+  ## package to compare floating point numbers
+  #sudo apt-get install bc
+  #sudo apt-get install tmux
+  #sudo apt-get install fortune
+  #sudo apt-get install cowsay
+  #sudo apt-get install vim
+  #sudo apt-get install ranger
+#elif [[ "$OSTYPE" == "darwin"* ]]; then
+  #brew install zsh
+  #brew install ag
+  ## package to compare floating point numbers
+  #brew install bc
+  #brew install tmux
+  #brew install fortune
+  #brew install cowsay
+  #brew install ranger
+  #brew install macvim && brew link macvim
+#fi
+#echo "Finished Installing OS Dependencies"
 
-# oh my zsh
-echo "Installing Oh My Zsh"
-sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-echo "Finished Installing Oh My Zsh"
+## oh my zsh
+#echo "Installing Oh My Zsh"
+#sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#echo "Finished Installing Oh My Zsh"
 
 # oh my zsh plugins
 ## syntax highlighting
