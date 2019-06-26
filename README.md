@@ -6,7 +6,7 @@ This project contains all of my dev environment configuration files:
 * `.zshrc`
 * `.bashrc`
 * `.shell-functions` (functions that are shared between zsh and bash)
-* Brewfile
+* `Brewfile`
 * `.alacritty.yml`
 * snippets
 
