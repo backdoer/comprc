@@ -26,15 +26,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   sudo apt-get install vim
   sudo apt-get install ranger
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-  brew install zsh
-  brew install ag
-  # package to compare floating point numbers
-  brew install bc
-  brew install tmux
-  brew install fortune
-  brew install cowsay
-  brew install ranger
-  brew install macvim && brew link macvim
+  brew bundle
 fi
 echo "Finished Installing OS Dependencies"
 
