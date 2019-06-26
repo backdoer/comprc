@@ -1,37 +1,37 @@
 filetype off
 
 call plug#begin('~/.vim/plugged')
-	"Plug 'scrooloose/nerdtree' " Directory structure
-	"Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
-	Plug 'ryanoasis/vim-devicons' " dev icons for vim
-	Plug 'rbgrouleff/bclose.vim'
-	Plug 'francoiscabrol/ranger.vim' " Ranger
-	Plug 'tpope/vim-vinegar' " Vinegar
-	Plug 'itchyny/lightline.vim' " File info at bottom of vim
-	Plug 'SirVer/ultisnips' " Snippet Engine
-	Plug 'honza/vim-snippets' " Group of snippets
-	Plug 'elixir-editors/vim-elixir' " Elixir support for vim
-	Plug 'slashmili/alchemist.vim' " Elixir support for vim
-	Plug 'scrooloose/nerdcommenter' " Comment support
-	Plug 'pangloss/vim-javascript' " Javascript support for vim
-	Plug 'mxw/vim-jsx' " Jsx support for vim
-	"Plug 'mattn/emmet-vim' " Html expansion
-	Plug 'tpope/vim-fugitive' " Vim git integration
-	Plug 'airblade/vim-gitgutter' " Vim gutter integration
-	Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
-	Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
-	Plug 'junegunn/fzf.vim' " Vim plugin for fzf
-	Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
-	Plug 'vim-ruby/vim-ruby' " ruby syntax
-	"Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
-	"Plug 'jiangmiao/auto-pairs' " self closing pairs
-	Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
-	Plug 'kana/vim-submode' " submode
-	Plug 'w0rp/ale' " Async Linting
-	Plug 'tpope/vim-abolish' " String case coercion
-	Plug 'chiedo/vim-case-convert'
-	Plug 'leafgarland/typescript-vim' " Typescript support
+"Plug 'scrooloose/nerdtree' " Directory structure
+"Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
+Plug 'ryanoasis/vim-devicons' " dev icons for vim
+Plug 'rbgrouleff/bclose.vim'
+Plug 'francoiscabrol/ranger.vim' " Ranger
+Plug 'tpope/vim-vinegar' " Vinegar
+Plug 'itchyny/lightline.vim' " File info at bottom of vim
+Plug 'SirVer/ultisnips' " Snippet Engine
+Plug 'honza/vim-snippets' " Group of snippets
+Plug 'elixir-editors/vim-elixir' " Elixir support for vim
+Plug 'slashmili/alchemist.vim' " Elixir support for vim
+Plug 'scrooloose/nerdcommenter' " Comment support
+Plug 'pangloss/vim-javascript' " Javascript support for vim
+Plug 'mxw/vim-jsx' " Jsx support for vim
+"Plug 'mattn/emmet-vim' " Html expansion
+Plug 'tpope/vim-fugitive' " Vim git integration
+Plug 'airblade/vim-gitgutter' " Vim gutter integration
+Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
+Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
+Plug 'junegunn/fzf.vim' " Vim plugin for fzf
+Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
+Plug 'vim-ruby/vim-ruby' " ruby syntax
+"Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
+"Plug 'jiangmiao/auto-pairs' " self closing pairs
+Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
+Plug 'kana/vim-submode' " submode
+Plug 'w0rp/ale' " Async Linting
+Plug 'tpope/vim-abolish' " String case coercion
+Plug 'chiedo/vim-case-convert'
+Plug 'leafgarland/typescript-vim' " Typescript support
 call plug#end()
 
 """"""""""""""""""
@@ -69,9 +69,9 @@ nnoremap <leader><s-w> :set wrap!<cr>
 "let g:NERDTreeMapJumpNextSibling="" " To allow tmux/vim navigation
 "let NERDTreeShowHidden=1 " Display ignored files in NERDTree
 "autocmd bufenter * if (winnr("$") == 1
-     "\ && exists("b:NERDTree")
-     "\ && b:NERDTree.isTabTree())
-     "\ | q | endif " Automatically close vim if NERDTree is only buffer left
+      "\ && exists("b:NERDTree")
+      "\ && b:NERDTree.isTabTree())
+      "\ | q | endif " Automatically close vim if NERDTree is only buffer left
 "autocmd VimEnter * NERDTree " Automatically start NERDTree on open
 "let g:NERDTreeWinSize=40
 "map <leader>n :NERDTreeToggle<CR>
@@ -132,9 +132,9 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l ""'
 let s:ag_options = ' --hidden '
 
 let g:fzf_action = {
-	\ 'ctrl-t': 'tab split',
-	\ 'ctrl-space': 'split',
-	\ 'ctrl-v': 'vsplit' }
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-space': 'split',
+      \ 'ctrl-v': 'vsplit' }
 let g:fzf_history_dir = '~/.local/share/fzf-history' " Enable per-command history.
 let g:esearch = {'use': 'visual'} " Esearch with visual text
 let g:ag_apply_qmappings=1
@@ -148,17 +148,17 @@ noremap <leader>f :Ag<CR>
 " Ag search
 noremap <leader><s-f> :Ag!<CR>
 command! -bang -nargs=* Ag
-			\ call fzf#vim#ag(<q-args>,
-			\   s:ag_options,
-			\  <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-			\          : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-			\  <bang>0)
+      \ call fzf#vim#ag(<q-args>,
+      \   s:ag_options,
+      \  <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+      \          : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+      \  <bang>0)
 
 command! -bang -nargs=* Files
-			\ call fzf#vim#files(<q-args>,
-			\   <bang>0 ? fzf#vim#with_preview('up:60%')
-			\           : fzf#vim#with_preview('right:50%:hidden', '?'),
-			\   <bang>0) "Ag will show file names with a preview
+      \ call fzf#vim#files(<q-args>,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0) "Ag will show file names with a preview
 
 """""""""""""""""
 """ Lightline
@@ -177,11 +177,11 @@ set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 "" Linting
 """"""""""""""""
 "function! TrimWhiteSpace()
-	"let l = line(".")
-	"let c = col(".")
-	"%s/\s\+$//e
-	"%s/\r//ge
-	"call cursor(l, c)
+"let l = line(".")
+"let c = col(".")
+"%s/\s\+$//e
+"%s/\r//ge
+"call cursor(l, c)
 "endfunction
 "autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
 let g:ale_linters = { 'elixir': ['dialyxir'] }
@@ -274,10 +274,10 @@ endfunction
 " Elixir
 au FileType elixir call s:elixir_transformation_bindings()
 function! s:elixir_transformation_bindings()
-    " Switch string map to atom map
-    vnoremap <S-a> :s/"\([a-z_0-9]*\)" =>/\=submatch(1).':'/g<CR>
-    " Switch atom map to string map
-    vnoremap <S-s> :s/\([a-z_0-9]*\):/\='"'.submatch(1).'" =>'/g<CR>
+  " Switch string map to atom map
+  vnoremap <S-a> :s/"\([a-z_0-9]*\)" =>/\=submatch(1).':'/g<CR>
+  " Switch atom map to string map
+  vnoremap <S-s> :s/\([a-z_0-9]*\):/\='"'.submatch(1).'" =>'/g<CR>
 endfunction
 
 vnoremap crs :CamelToSnakeSel!<CR>
