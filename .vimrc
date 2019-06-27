@@ -210,7 +210,9 @@ nnoremap <C-p> gT
 """ Search and Replace
 """""""""""""""""""""""
 " Search and replace word under cursor
-nnoremap <Leader>r :%s/<C-r><C-w>//gc<left><left><left>
+"nnoremap <Leader>r :%s/<C-r><C-w>//gc<left><left><left>
+" Search and replace
+nnoremap <Leader>r :%s///gc<left><left><left><left>
 " Search and replace word in clipboard
 nnoremap <Leader><s-r> :%s/<C-r>0//gc<left><left><left>
 
@@ -283,12 +285,38 @@ endfunction
 vnoremap crs :CamelToSnakeSel!<CR>
 vnoremap crc :SnakeToCamelSel!<CR>
 
-""""""""""""""""
+nnoremap <Leader>sw :Sur / /<left><left>
+nnoremap <Leader>sl :SurL / /<left><left>
+
+" Surround each line with a front and a back
+command! -nargs=* SurL :call SurroundLines(<f-args>)
+function SurroundLines(front, back)
+  let command = "normal i" . a:front[1:] . "\<Esc>La" . a:back[1:] . "\<Esc>jH"
+  while line('.') < line('$')
+    execute command
+  endwhile
+  execute command
+endfunction
+
+" Surround each word in a line with a front and a back
+command! -nargs=* Sur :call SurroundWords(<f-args>)
+function SurroundWords(front, back)
+  let command = "normal i" . a:front[1:] . "\<Esc>Ea" . a:back[1:] . "\<Esc>W"
+  while col('.') < strwidth(getline('.'))
+    execute command
+  endwhile
+  execute command
+endfunction
+
+"vnoremap <Leader>r :'<,'>s/\%Vfoo\%V/bar/g<left><left><left><left><left><left>
+nnoremap <S-k> :s/ /\r/g<cr>
+
+"""""""""""""""
 """ Macros
 """"""""""""""""
 "let @[key]='[macro-hash]'
 " Commatize
-let @c="Ea,\<Esc>ll"
+let @c="Ea,\<Esc>W"
 
 """"""""""""""""
 """ Movements
