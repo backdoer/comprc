@@ -49,16 +49,15 @@ windows:
         - cdw review_rocket
         - rr
   - BlackMamba:
-      layout: tiled
-      panes:
-        - bm
-        - ngrok
-        - cdw black_mamba
-  - Rapidash:
       layout: main-horizontal
       panes:
-        - cdw rapidash
-        - rp
+        - cdw black_mamba
+        - bm
+  - Link:
+      layout: main-horizontal
+      panes:
+        - cdw link
+        - lk
   - Snowden:
        layout: main-horizontal
        panes:
@@ -74,20 +73,20 @@ windows:
       panes:
         - cdw kazaam
         - ka
-  - PodiumUi:
+  - Navi:
       layout: main-horizontal
       panes:
-        - cdw podium-ui
-        - pi
+        - cdw navi
+        - nv
   - PodiumCharts:
       layout: main-horizontal
       panes:
         - cdw podium-charts
         - pc
-  - Halberd:
+  - Platform:
       layout: main-horizontal
       panes:
-        - cdw halberd
+        - ah
         - hb
 
 
