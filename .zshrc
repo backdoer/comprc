@@ -1,6 +1,5 @@
 # If you come from bash you might have to change your $PATH.
 	# export PATH=$HOME/bin:/usr/local/bin:$PATH
-	# HEY
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/brianbolnick/.oh-my-zsh
@@ -60,7 +59,7 @@ ZSH_THEME="hyperzsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-git zsh-autosuggestions brew osx zsh-syntax-highlighting colored-man-pages
+git zsh-autosuggestions brew osx colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -98,6 +97,7 @@ get_latest_package () { asdf list-all $1 | egrep '^[^a-zA-Z]+$' | sed -Ee 's/^(.
 #Docker
 alias dc="docker-compose"
 alias d="docker"
+alias dprune="docker system prune -a --volumes"
 
 alias ls='ls -GF'
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
@@ -106,6 +106,15 @@ alias rage='foo(){ rm -rf "$1"}; foo'
 alias pid='foo(){ lsof -nP -i4TCP:"$1" | grep LISTEN }; foo'
 alias newf='foo(){mkdir "$1"; vim "$1"/"$2"}; foo '
 alias tattach='foo(){tmux a -t "$1"}; foo'
+
+phx() {
+	source .env
+	iex -S mix phx.server
+}
+
+alias phox='iex -S mix phoenix.server'
+
+alias suck='yarn cache clean'
 
 alias podium='tmuxinator start podium'
 alias dev='tmuxinator start home'
@@ -122,26 +131,35 @@ bm(){
   git pull
 	source .env
 	mix deps.get
-	mix phoenix.server
+	mix ecto.migrate
+	iex -S mix phx.server
 }
+ah(){
+	cdw akron_hammer
+  git pull
+	source .env
+	mix deps.get
+	iex -S mix phx.server
+}
+
 mk(){
 	cdw magic
   git pull
 	source .env
 	mix deps.get
-	mix phx.server
+	iex -S mix phx.server
 }
 pi(){
 	cdw podium-ui
 	git pull
-	npm install
-	npm run storybook
+	yarn
+	yarn storybook
 }
 pc(){
 	cdw podium-charts
 	git pull
-	npm install
-	npm run storybook
+	yarn
+	yarn storybook
 }
 ngrok(){
 	cd
@@ -180,7 +198,7 @@ rp(){
 	git pull
 	npm install
 	mix deps.get
-	mix phoenix.server
+	iex -S mix phoenix.server
 }
 sn(){
 	cdw snowden
@@ -190,17 +208,29 @@ sn(){
 	iex -S mix phx.server
 }
 hb(){
-	cdw halberd
+	cdw platform
 	gpm
-	source .env
-	mix deps.get
-	iex -S mix phx.server
+	dc ps
 }
 ph(){
 	cdw phyllis
 	git pull
 	mix deps.get
 	iex -S mix phoenix.server
+}
+nv(){
+	cdw navi
+	git pull
+	make deps
+	source .env
+	make server
+}
+lk(){
+	cdw link
+	git pull
+	source .env
+	mix deps.get
+	iex -S mix phx.server
 }
 wclient(){
 	cdw training/hippo_client
@@ -233,8 +263,6 @@ native(){
 	yarn start
 }
 
-
-
 function gc() {
 	if [ "$1" != "" ] # or better, if [ -n "$1" ]
 	then
@@ -265,7 +293,6 @@ function sendp() {
 	git push -u origin HEAD && expo publish
 }
 
-
 autoload -U promptinit; promptinit
 prompt pure
 export PATH="$PATH:/usr/local/opt/node@8/bin"
@@ -282,7 +309,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-source /Users/brianbolnick/comprc/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /Users/brianbolnick/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
