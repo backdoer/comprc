@@ -15,7 +15,6 @@ Plug 'slashmili/alchemist.vim' " Elixir support for vim
 Plug 'scrooloose/nerdcommenter' " Comment support
 Plug 'pangloss/vim-javascript' " Javascript support for vim
 Plug 'mxw/vim-jsx' " Jsx support for vim
-"Plug 'mattn/emmet-vim' " Html expansion
 Plug 'tpope/vim-fugitive' " Vim git integration
 Plug 'airblade/vim-gitgutter' " Vim gutter integration
 Plug 'rafi/awesome-vim-colorschemes' " Vim color schemes
@@ -24,14 +23,20 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder
 Plug 'junegunn/fzf.vim' " Vim plugin for fzf
 Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
 Plug 'vim-ruby/vim-ruby' " ruby syntax
-"Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
-"Plug 'jiangmiao/auto-pairs' " self closing pairs
-Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
+Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
+Plug 'tpope/vim-repeat' " Plugin to add support for repeating surround commands (and other plugins)
+Plug 'alvan/vim-closetag' " Auto close html tags
+"Plug 'mattn/emmet-vim' " Html expansion
+Plug 'jiangmiao/auto-pairs' " self closing pairs
+"Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
+Plug 'backdoer/splitjoin.vim' " fork of splitjoin including elixir functions
 Plug 'kana/vim-submode' " submode
 Plug 'w0rp/ale' " Async Linting
 Plug 'tpope/vim-abolish' " String case coercion
 Plug 'chiedo/vim-case-convert'
 Plug 'leafgarland/typescript-vim' " Typescript support
+Plug 'kana/vim-textobj-user' " Define custom text objects
+Plug 'andyl/vim-textobj-elixir' " Elixir text objects
 call plug#end()
 
 """"""""""""""""""
@@ -117,7 +122,7 @@ noremap <leader><s-t> :tabf %:h/<CR>
 """""""""""""""""
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit="tab"
 let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/my-snippets/UltiSnips']
 "let g:UltiSnipsListSnippets = "<c-r>"
 "let g:UltiSnipsExpandTrigger="<tab>"
@@ -282,13 +287,14 @@ function! s:elixir_transformation_bindings()
   vnoremap <S-s> :s/\([a-z_0-9]*\):/\='"'.submatch(1).'" =>'/g<CR>
 endfunction
 
+" General
 vnoremap crs :CamelToSnakeSel!<CR>
 vnoremap crc :SnakeToCamelSel!<CR>
 
 nnoremap <Leader>sw :Sur / /<left><left>
 nnoremap <Leader>sl :SurL / /<left><left>
 
-" Surround each line with a front and a back
+" Surround each line in a file with a front and a back
 command! -nargs=* SurL :call SurroundLines(<f-args>)
 function SurroundLines(front, back)
   let command = "normal i" . a:front[1:] . "\<Esc>La" . a:back[1:] . "\<Esc>jH"
@@ -311,12 +317,18 @@ endfunction
 "vnoremap <Leader>r :'<,'>s/\%Vfoo\%V/bar/g<left><left><left><left><left><left>
 nnoremap <S-k> :s/ /\r/g<cr>
 
+
+"""""""""""""""""""
+""" Close tag
+"""""""""""""""""""
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx"
+
 """""""""""""""
 """ Macros
 """"""""""""""""
 "let @[key]='[macro-hash]'
 " Commatize
-let @c="Ea,\<Esc>W"
+"let @c="Ea,\<Esc>W"
 
 """"""""""""""""
 """ Movements
@@ -380,4 +392,8 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 " Multiple Clipboards
 " " [char] [operation]
 "
+" Record macro
+" q [letter]
 "
+" Run macro
+" @ [letter]
