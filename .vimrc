@@ -27,7 +27,8 @@ Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
 Plug 'vim-ruby/vim-ruby' " ruby syntax
 "Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
 "Plug 'jiangmiao/auto-pairs' " self closing pairs
-Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
+"Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
+Plug 'backdoer/splitjoin.vim' " fork of splitjoin including elixir functions
 Plug 'kana/vim-submode' " submode
 Plug 'w0rp/ale' " Async Linting
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
@@ -260,10 +261,58 @@ function! s:js_test_bindings()
 	nnoremap <buffer> <Leader><s-a> :!clear && npm run test %<cr>
 endfunction
 
+"""""""""""""""""""
+""" Transformations
+"""""""""""""""""""
+" Elixir
+au FileType elixir call s:elixir_transformation_bindings()
+function! s:elixir_transformation_bindings()
+  " Switch string map to atom map
+  vnoremap <S-a> :s/"\([a-z_0-9]*\)" =>/\=submatch(1).':'/g<CR>
+  " Switch atom map to string map
+  vnoremap <S-s> :s/\([a-z_0-9]*\):/\='"'.submatch(1).'" =>'/g<CR>
+endfunction
+
+" General
+vnoremap crs :CamelToSnakeSel!<CR>
+vnoremap crc :SnakeToCamelSel!<CR>
+
+nnoremap <Leader>sw :Sur / /<left><left>
+nnoremap <Leader>sl :SurL / /<left><left>
+
+" Surround each line in a file with a front and a back
+command! -nargs=* SurL :call SurroundLines(<f-args>)
+function SurroundLines(front, back)
+  let command = "normal i" . a:front[1:] . "\<Esc>La" . a:back[1:] . "\<Esc>jH"
+  while line('.') < line('$')
+    execute command
+  endwhile
+  execute command
+endfunction
+
+" Surround each word in a line with a front and a back
+command! -nargs=* Sur :call SurroundWords(<f-args>)
+function SurroundWords(front, back)
+  let command = "normal i" . a:front[1:] . "\<Esc>Ea" . a:back[1:] . "\<Esc>W"
+  while col('.') < strwidth(getline('.'))
+    execute command
+  endwhile
+  execute command
+endfunction
+
+"vnoremap <Leader>r :'<,'>s/\%Vfoo\%V/bar/g<left><left><left><left><left><left>
+nnoremap <S-k> :s/ /\r/g<cr>
+
 """"""""""""""""
 """ Macros
 """"""""""""""""
 "let @[key]='[macro-hash]'
+
+
+"""""""""""""""""""
+""" Close tag
+"""""""""""""""""""
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx"
 
 """"""""""""""""
 """ Movements
