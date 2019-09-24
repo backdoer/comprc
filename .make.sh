@@ -35,6 +35,9 @@ echo "Installing Oh My Zsh"
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 echo "Finished Installing Oh My Zsh"
 
+# Change permissions on zsh files
+sudo chown -R $(whoami):staff ~/.oh-my-zsh ~/.zsh*
+
 # oh my zsh plugins
 ## syntax highlighting
 #git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting

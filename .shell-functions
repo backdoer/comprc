@@ -57,3 +57,6 @@ alias e_vimrc="vim $HOME/.vimrc"
 #Docker
 alias dc="docker-compose"
 alias d="docker"
+
+# Enable iex history
+export ERL_AFLAGS="-kernel shell_history enabled"

@@ -27,7 +27,7 @@ Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
 Plug 'tpope/vim-repeat' " Plugin to add support for repeating surround commands (and other plugins)
 Plug 'alvan/vim-closetag' " Auto close html tags
 "Plug 'mattn/emmet-vim' " Html expansion
-Plug 'jiangmiao/auto-pairs' " self closing pairs
+"Plug 'jiangmiao/auto-pairs' " self closing pairs
 "Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'backdoer/splitjoin.vim' " fork of splitjoin including elixir functions
 Plug 'kana/vim-submode' " submode
