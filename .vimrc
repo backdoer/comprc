@@ -40,7 +40,14 @@ call plug#end()
 """ Core
 """""""""""""""""
 syntax on
-colorscheme onedark " theme
+set termguicolors
+"let ayucolor="mirage"
+"if (has("termguicolors"))
+	"set termguicolors
+"endif
+
+"colorscheme OceanicNext
+colorscheme one " theme
 set re=1 " This uses a different regex engine more suited for ruby
 let mapleader = "\<Space>"
 set clipboard=unnamed "Use system clipboard
