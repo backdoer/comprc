@@ -45,7 +45,23 @@ gd(){
   git branch -d $1
 }
 
+export GIT_MERGE_AUTOEDIT=no # don't open vim when pulling master
+
+gmm(){
+  git checkout master
+  git pull origin master
+  git checkout -
+  git merge master
+  git push --no-verify
+}
+
+# Rebease only YOUR commits onto master
+# git rebase --onto master reactions reaction-users
+
 alias gdbr="git branch | grep -v "master" | xargs git branch -d"
+alias gmm_all="git branch | grep -v "master" | xargs git checkout | gmm"
+
+alias uuid="uuidgen | tr \"[:upper:]\" \"[:lower:]\" | tr -d '[:space:]' | pbcopy && pbpaste"
 
 # directories
 alias ls='ls -GFh'

@@ -282,9 +282,13 @@ endfunction
 au FileType elixir call s:elixir_transformation_bindings()
 function! s:elixir_transformation_bindings()
   " Switch string map to atom map
-  vnoremap <S-a> :s/"\([a-z_0-9]*\)" =>/\=submatch(1).':'/g<CR>
+  vnoremap <leader>a :s/"\([a-z_0-9]*\)" =>/\=submatch(1).':'/g<CR>
   " Switch atom map to string map
-  vnoremap <S-s> :s/\([a-z_0-9]*\):/\='"'.submatch(1).'" =>'/g<CR>
+  vnoremap <leader>s :s/\([a-z_0-9]*\):/\='"'.submatch(1).'" =>'/g<CR>
+  " Switch atom map to json object
+  vnoremap <leader>j :s/\([a-z_0-9]*\):/\='"'.submatch(1).'":'/g \| :'<,'>s/%{/{/g <CR>
+  " Switch json object to elixir atom map
+  vnoremap <leader>e :s/"\([a-z_0-9]*\)":/\=submatch(1).':'/g \| :'<,'>s/{/%{/g <CR>
 endfunction
 
 " General
