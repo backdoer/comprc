@@ -333,6 +333,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx"
 "let @[key]='[macro-hash]'
 " Commatize
 "let @c="Ea,\<Esc>W"
+let @r="12ddvEebhxjddveeeeebhxkJjH5ddddddkJHj"
 
 """"""""""""""""
 """ Movements

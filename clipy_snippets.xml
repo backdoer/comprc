@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<folders>
+	<folder>
+		<title>Slack</title>
+		<snippets>
+			<snippet>
+				<title>Clapping</title>
+				<content>:clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: :clapping: </content>
+			</snippet>
+			<snippet>
+				<title>Shame</title>
+				<content>:shame_shame: :shame_shame: :shame_shame: :shame_shame: :shame_shame: :shame_shame: :shame_shame: :shame_shame: :shame_shame: :shame_shame: :shame_shame:</content>
+			</snippet>
+			<snippet>
+				<title>Shrug</title>
+				<content>¯\_(ツ)_/¯</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>Stripe</title>
+		<snippets>
+			<snippet>
+				<title>Create Payment Intent</title>
+				<content>Stripe.PaymentIntent.create(%{amount: 1000, currency: &quot;usd&quot;, customer: &quot;cus_HtvcV1spsf27dj&quot;, capture_method: &quot;manual&quot;})</content>
+			</snippet>
+			<snippet>
+				<title>Confirm Payment Intent</title>
+				<content>Stripe.PaymentIntent.confirm(&quot;id&quot;, %{payment_method: &quot;pm_id&quot;})</content>
+			</snippet>
+			<snippet>
+				<title>Transfer to Podium</title>
+				<content>Gringotts.Stripe.create_transfer(%{amount: ?, currency: &quot;usd&quot;, metadata: %{reason: &quot;adjustment&quot;}, destination: &quot;acct_1BLxrvKDql1vQYcg&quot;}, connect_account: &quot;?&quot;)</content>
+			</snippet>
+			<snippet>
+				<title>Create payment method</title>
+				<content>Stripe.PaymentMethod.create(%{type: &quot;card&quot;, card: %{number: &quot;4242424242424242&quot;, exp_month: 12, exp_year: 2025}})</content>
+			</snippet>
+			<snippet>
+				<title>customer ID</title>
+				<content>cus_HtvcV1spsf27dj</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>Stripe Cards</title>
+		<snippets>
+			<snippet>
+				<title>valid credit</title>
+				<content>4242424242424242</content>
+			</snippet>
+			<snippet>
+				<title>valid debit</title>
+				<content>4000056655665556</content>
+			</snippet>
+			<snippet>
+				<title>valid AUS</title>
+				<content>4000000360000006</content>
+			</snippet>
+			<snippet>
+				<title>valid CAN</title>
+				<content>4000001240000000</content>
+			</snippet>
+			<snippet>
+				<title>insufficient funds</title>
+				<content>4000000000009995</content>
+			</snippet>
+			<snippet>
+				<title>expired card</title>
+				<content>4000000000000069</content>
+			</snippet>
+			<snippet>
+				<title>incorrect cvc</title>
+				<content>4000000000000127</content>
+			</snippet>
+			<snippet>
+				<title>fraudulent</title>
+				<content>4100000000000019</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>Mix Tasks</title>
+		<snippets>
+			<snippet>
+				<title>MIX_TASK_ENV</title>
+				<content>prod-usw2-kubernetes</content>
+			</snippet>
+			<snippet>
+				<title>Loc Product Upsert (Anakin)</title>
+				<content>loc_product.upsert_loc_product org_uid loc_uid payments</content>
+			</snippet>
+			<snippet>
+				<title>DW Backfill</title>
+				<content>data_warehouse.export --start-date 2018-12-01 --schemas payment</content>
+			</snippet>
+			<snippet>
+				<title>Invoice Activity Backfill</title>
+				<content>invoices.backfill_invoice_activity uid1,uid2</content>
+			</snippet>
+			<snippet>
+				<title>Payments Org Update</title>
+				<content>organization.update uid</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>Queries</title>
+		<snippets>
+			<snippet>
+				<title>Standard Invoice Join</title>
+				<content>select * from invoices i
+join payments p on i.id = p.invoice_id
+join accounts a on i.account_id = a.id
+join organizations o on a.organization_id = o.id;</content>
+			</snippet>
+			<snippet>
+				<title>* By Charge Id</title>
+				<content>select o.podium_organization_uid, i.* from payments p
+join invoices i on i.id = p.invoice_id
+join accounts a on a.id = i.account_id
+join organizations o on o.id = a.organization_id
+where p.stripe_charge_id = &apos;ch_1HeLc3KDql1vQYcgkvT9KYgD&apos;;</content>
+			</snippet>
+			<snippet>
+				<title>Auto Debit Opt-Ins</title>
+				<content>select o.podium_organization_name, ri.* from recurring_invoices ri
+join invoices i on i.recurring_invoice_id = ri.id
+join accounts a on a.id = i.account_id
+join organizations o on o.id = a.organization_id
+where auto_debit = true and i.is_test = false;</content>
+			</snippet>
+			<snippet>
+				<title>Transaction</title>
+				<content>BEGIN;
+
+/* Query here */
+
+
+ROLLBACK;
+
+COMMIT;</content>
+			</snippet>
+			<snippet>
+				<title>Cancel recurring invoice</title>
+				<content>update recurring_invoices set status = &apos;cancelled&apos;, status_date = now() where uid in ();</content>
+			</snippet>
+			<snippet>
+				<title>Reset MFB</title>
+				<content>update accounts set plaid_account_status = &apos;unverified&apos;, plaid_account_id = NULL, plaid_access_token = NULL where uid = &apos;&apos;;</content>
+			</snippet>
+		</snippets>
+	</folder>
+</folders>
