@@ -15,6 +15,49 @@
 				<title>Shrug</title>
 				<content>¯\_(ツ)_/¯</content>
 			</snippet>
+			<snippet>
+				<title>Michael Scott No Gif</title>
+				<content>/gif michael scott no</content>
+			</snippet>
+			<snippet>
+				<title>Flip Off</title>
+				<content>
+        _____
+       |    ||
+       |\___/|
+       |     |
+       |     |
+       |     |
+       |     |
+       |     |
+       |     |
+   ____||____|____
+  /    |     |     \
+ /     |     |    | \
+|      |     |    |  |
+|      |     |    |  |
+|                 |  |
+|                 |  |
+|                    /
+|                   /
+ \                 /
+  \               /
+   |             |
+   |             |
+</content>
+			</snippet>
+			<snippet>
+				<title>Backdoer</title>
+				<content>
+██████╗  █████╗  ██████╗██╗  ██╗██████╗  ██████╗ ███████╗██████╗ 
+██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔═══██╗██╔════╝██╔══██╗
+██████╔╝███████║██║     █████╔╝ ██║  ██║██║   ██║█████╗  ██████╔╝
+██╔══██╗██╔══██║██║     ██╔═██╗ ██║  ██║██║   ██║██╔══╝  ██╔══██╗
+██████╔╝██║  ██║╚██████╗██║  ██╗██████╔╝╚██████╔╝███████╗██║  ██║
+╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+
+</content>
+			</snippet>
 		</snippets>
 	</folder>
 	<folder>
@@ -39,6 +82,10 @@
 			<snippet>
 				<title>customer ID</title>
 				<content>cus_HtvcV1spsf27dj</content>
+			</snippet>
+			<snippet>
+				<title>Riskified noti</title>
+				<content>{&quot;order&quot;:{&quot;id&quot;:&quot;uid&quot;,&quot;status&quot;:&quot;approved&quot;,&quot;old_status&quot;:&quot;submitted&quot;,&quot;description&quot;:&quot;Reviewed and approved by Riskified&quot;}}</content>
 			</snippet>
 		</snippets>
 	</folder>
@@ -87,8 +134,16 @@
 				<content>prod-usw2-kubernetes</content>
 			</snippet>
 			<snippet>
+				<title>MIX_TASK_ENV Payments</title>
+				<content>prod-usw2-payments</content>
+			</snippet>
+			<snippet>
 				<title>Loc Product Upsert (Anakin)</title>
 				<content>loc_product.upsert_loc_product org_uid loc_uid payments</content>
+			</snippet>
+			<snippet>
+				<title>Flip flags (Halberd)</title>
+				<content>flags.flip --for loc/org --uids uuid1,uuid2 --slugs flag1,flag2 --off/on</content>
 			</snippet>
 			<snippet>
 				<title>DW Backfill</title>
