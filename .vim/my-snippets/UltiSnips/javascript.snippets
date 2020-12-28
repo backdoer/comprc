@@ -35,13 +35,16 @@ endsnippet
 
 # React class
 snippet class
-class ${1:MyComponent} extends Component {
-	render() {
+import React from 'react'
+import styled from 'styled-components/macro';
+
+const ${1:MyComponent} = () => {
 		return (
 			${0:<div></div>}
 		)
-	}
 }
+
+export default ${1:MyComponent};
 endsnippet
 
 snippet eclass

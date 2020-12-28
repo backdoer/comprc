@@ -12,6 +12,7 @@ Plug 'itchyny/lightline.vim' " File info at bottom of vim
 Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
 Plug 'elixir-editors/vim-elixir' " Elixir support for vim
+Plug 'zxqfl/tabnine-vim' " Autocomplete for vim
 "Plug 'slashmili/alchemist.vim' " Elixir support for vim
 Plug 'scrooloose/nerdcommenter' " Comment support
 Plug 'pangloss/vim-javascript' " Javascript support for vim
@@ -196,6 +197,8 @@ let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
 
+autocmd BufEnter *.{js,ts,jsx,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,ts,jsx,tsx} :syntax sync clear 
 """"""""""""""""""
 """" Navigation
 """"""""""""""""""
