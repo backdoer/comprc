@@ -90,6 +90,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Add python pip packages to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 
+# Ngrok
+export PATH="$PATH:/usr/local/bin"
+
 # Java
 export ANDROID_HOME="/Users/tylerdoermann/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"

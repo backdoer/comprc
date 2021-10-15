@@ -144,6 +144,8 @@ let g:fzf_history_dir = '~/.local/share/fzf-history' " Enable per-command histor
 let g:esearch = {'use': 'visual'} " Esearch with visual text
 let g:ag_apply_qmappings=1
 let g:ag_mapping_message=1
+" Put search screen at bottom of screen instead of top
+let g:fzf_layout = { 'down': '40%' }
 " Open file finder
 noremap <leader>p :Files<CR>
 " Open file finder full screen
@@ -152,18 +154,21 @@ noremap <leader><s-p> :Files!<CR>
 noremap <leader>f :Ag<CR>
 " Ag search
 noremap <leader><s-f> :Ag!<CR>
+" Had to overwrite the full-screen opt that used to pass in a bang
+" because it was clashing with tmux focus-events. I'm instead
+" passing in 'down': '100%' to make it full screen.
 command! -bang -nargs=* Ag
       \ call fzf#vim#ag(<q-args>,
       \   s:ag_options,
-      \  <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+      \  <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'down': '100%'}, 'up:60%')
       \          : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-      \  <bang>0)
+      \  0)
 
 command! -bang -nargs=* Files
       \ call fzf#vim#files(<q-args>,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \   <bang>0 ? fzf#vim#with_preview({'down': '100%'}, 'up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0) "Ag will show file names with a preview
+      \   0) "Ag will show file names with a preview
 
 """""""""""""""""
 """ Lightline
