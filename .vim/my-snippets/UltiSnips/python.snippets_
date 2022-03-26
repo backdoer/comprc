@@ -1,0 +1,8 @@
+priority 1
+
+snippet pry "pdb debug" b
+import pdb; pdb.set_trace()
+endsnippet
+
+
+

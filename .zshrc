@@ -1,6 +1,12 @@
 # If you come from bash you might have to change your $PATH.
 	# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git zsh-autosuggestions brew macos colored-man-pages asdf jsontools)
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/brianbolnick/.oh-my-zsh
 export EDITOR='vim'
@@ -54,17 +60,10 @@ ZSH_THEME="hyperzsh"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-git zsh-autosuggestions brew osx colored-man-pages
-)
-
 source $ZSH/oh-my-zsh.sh
 
-get_latest_package () { asdf list-all $1 | egrep '^[^a-zA-Z]+$' | sed -Ee 's/^(.*-)([0-9.]+)(\.ime)$/\2.-1 \1\2\3/' | sort -t. -n -k1,1 -k2,2 -k3,3 -k4,4 | cut -d\  -f2- | tail -n 1 ; }
+zstyle ':omz:update' mode auto
+#get_latest_package () { asdf list-all $1 | egrep '^[^a-zA-Z]+$' | sed -Ee 's/^(.*-)([0-9.]+)(\.ime)$/\2.-1 \1\2\3/' | sort -t. -n -k1,1 -k2,2 -k3,3 -k4,4 | cut -d\  -f2- | tail -n 1 ; }
 
 # User configuration
 
@@ -94,6 +93,7 @@ get_latest_package () { asdf list-all $1 | egrep '^[^a-zA-Z]+$' | sed -Ee 's/^(.
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
 #Docker
 alias dc="docker-compose"
 alias d="docker"
@@ -106,11 +106,11 @@ alias rage='foo(){ rm -rf "$1"}; foo'
 alias pid='foo(){ lsof -nP -i4TCP:"$1" | grep LISTEN }; foo'
 alias newf='foo(){mkdir "$1"; vim "$1"/"$2"}; foo '
 alias tattach='foo(){tmux a -t "$1"}; foo'
-alias ios='make run-ios'
-alias ms='make server'
 alias src='source ~/.zshrc'
-alias vime='vim ~/.vimrc'
+alias vime='sudo vim ~/.vimrc'
 alias rebase='gpm && git push origin HEAD'
+alias awsume='. awsume'
+alias am='foo(){ alembic revision --autogenerate -m "$1" }; foo'
 
 phx() {
 	source .env
@@ -120,169 +120,21 @@ phx() {
 alias phox='iex -S mix phoenix.server'
 alias exto='ecto'
 alias suck='yarn cache clean'
+alias py="python3"
+alias ngrok='foo(){ cdw && ./ngrok http "$1"}; foo'
+alias loct='foo(){ lt --port "$1" --subdomain "$2"}; foo'
 
-alias work='tmuxinator start podium'
+alias work='tmuxinator start emotive'
 alias dev='tmuxinator start home'
-alias podium-edit='tmuxinator open podium'
+
 # Git
-alias go="git checkout"
+alias gc="git checkout"
 alias gs="git status"
 alias gph="git push heroku master"
-alias gpm="git pull origin master"
+alias gpm="git pull origin main"
 alias gp="git pull"
 alias tmux="TERM=screen-256color-bce tmux"
-
-#Podium Aliases
-bm(){
-	cdw black_mamba
-  git pull
-	source .env
-	mix deps.get
-	mix ecto.migrate
-	iex -S mix phx.server
-}
-ah(){
-	cdw akron_hammer
-  git pull
-	source .env
-	mix deps.get
-	iex -S mix phx.server
-}
-
-mk(){
-	cdw magic
-  git pull
-	source .env
-	mix deps.get
-	iex -S mix phx.server
-}
-pi(){
-	cdw podium-ui
-	git pull
-	yarn
-	yarn storybook
-}
-pc(){
-	cdw podium-charts
-	git pull
-	yarn
-	yarn storybook
-}
-ngrok(){
-	cd
-	./ngrok http --subdomain bolnick-mamba 4000
-}
-ka(){
-	cdw kazaam
-	git pull
-	source .env
-	yarn install
-	yarn start
-}
-db(){
-	cdw dashboard-frontend
-	git pull
-	npm install
-	nf start dev
-}
-sc(){
-	cdw stormcrow
-  git pull
-	mix deps.get
-	npm install
-	mix phoenix.server
-}
-rr(){
-	cdw review_rocket
-	git pull
-	bundle install
-	rake db:migrate
-	lsof -i:3000 | awk '{if(NR>1) print $2}' |  while read line; do kill -9 $line; done
-	bundle exec rails s
-}
-rp(){
-	cdw rapidash
-	git pull
-	npm install
-	mix deps.get
-	iex -S mix phoenix.server
-}
-sn(){
-	cdw snowden
-	git pull
-	source .env
-	mix deps.get
-	iex -S mix phx.server
-}
-hb(){
-	cdw platform
-	gpm
-	dc ps
-}
-ph(){
-	cdw phyllis
-	git pull
-	mix deps.get
-	iex -S mix phoenix.server
-}
-nv(){
-	cdw navi
-	git pull
-	make deps
-	source .env
-	make server
-}
-lk(){
-	cdw link
-	git pull
-	source .env
-	mix deps.get
-	iex -S mix phx.server
-}
-sb(){
-	cdw strong_bad
-	git pull
-	source .env
-	mix deps.get
-	iex -S mix phx.server
-}
-sc(){
-	cdw stormcrow
-	git pull
-	source .env
-	mix deps.get
-	iex -S mix phx.server
-}
-wclient(){
-	cdw training/hippo_client
-	gpm
-	yarn start
-}
-wserver(){
-	cdw training/hippo_api
-	gpm
-	iex -S mix phx.server
-}
-wnative(){
-	cdw training/hippo_native
-	gpm
-	yarn start
-}
-client(){
-	cdw hippo_client
-	gpm
-	yarn start
-}
-server(){
-	cdw hippo_api
-	gpm
-	iex -S mix phx.server
-}
-native(){
-	cd local_dev/hippo_native
-	gpm
-	yarn start
-}
+alias gi="echo -e 'a\n*\nq\n'|git add -i"
 
 function gc() {
 	if [ "$1" != "" ] # or better, if [ -n "$1" ]
@@ -297,9 +149,9 @@ function sendno() {
 	git add --patch
 	if [ "$1" != "" ] # or better, if [ -n "$1" ]
 	then
-		git commit -m "$1"
+		git commit -m "$1" --no-verify
 	else
-		git commit -m update
+		git commit -m update --no-verify
 	fi
 	git push -u origin HEAD --no-verify
 }
@@ -315,6 +167,7 @@ function send() {
 	fi
 	git push -u origin HEAD
 }
+
 function sendp() {
 	git add --patch
 	if [ "$1" != "" ] # or better, if [ -n "$1" ]
@@ -326,18 +179,13 @@ function sendp() {
 	git push -u origin HEAD && expo publish
 }
 
-
-
-
 autoload -U promptinit; promptinit
 prompt pure
-export PATH="$PATH:/usr/local/opt/node@8/bin"
-export PATH="/usr/local/Cellar/rabbitmq/3.7.7_1/sbin:$PATH"
 
-. $HOME/.asdf/asdf.sh
+export CPATH=`xcrun --show-sdk-path`/usr/include
 
-. $HOME/.asdf/completions/asdf.bash
-export PATH="/usr/local/sbin:$PATH"
+#export PATH="/usr/local/sbin:$PATH"
+export PATH="$PATH:/usr/local/sbin"
 source ~/.bin/tmuxinator.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -358,24 +206,22 @@ c() {
   awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
   fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs open
 }
-export JAVA_HOME=$(/usr/libexec/java_home)
-export PATH=${JAVA_HOME}/bin:$PATH
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 source /Users/brianbolnick/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/brianbolnick/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/brianbolnick/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+#if [ -f '/Users/brianbolnick/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/brianbolnick/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/brianbolnick/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/brianbolnick/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+#if [ -f '/Users/brianbolnick/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/brianbolnick/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+#. /usr/local/opt/asdf/libexec/asdf.sh
+
+export PATH="$HOME/.poetry/bin:$PATH"
+
+#. /usr/local/opt/asdf/asdf.sh
+. /usr/local/opt/asdf/libexec/asdf.sh
