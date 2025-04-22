@@ -22,7 +22,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
 Plug 'junegunn/fzf.vim' " Vim plugin for fzf
 Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
-Plug 'vim-ruby/vim-ruby' " ruby syntax
+"Plug 'vim-ruby/vim-ruby' " ruby syntax
 Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
 Plug 'tpope/vim-repeat' " Plugin to add support for repeating surround commands (and other plugins)
 Plug 'alvan/vim-closetag' " Auto close html tags
@@ -31,12 +31,17 @@ Plug 'alvan/vim-closetag' " Auto close html tags
 "Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'backdoer/splitjoin.vim' " fork of splitjoin including elixir functions
 Plug 'kana/vim-submode' " submode
-Plug 'w0rp/ale' " Async Linting
+"Plug 'w0rp/ale' " Async Linting
 Plug 'tpope/vim-abolish' " String case coercion
 Plug 'chiedo/vim-case-convert'
 Plug 'leafgarland/typescript-vim' " Typescript support
+Plug 'peitalin/vim-jsx-typescript' " Typescript support
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kana/vim-textobj-user' " Define custom text objects
 Plug 'andyl/vim-textobj-elixir' " Elixir text objects
+Plug 'styled-components/vim-styled-components'
+"Plug 'posva/vim-vue'
+"Plug 'posva/vim-vue-plugin'
 call plug#end()
 
 """"""""""""""""""
@@ -51,7 +56,7 @@ set backspace=2 " make backspace work like most other programs
 set incsearch " Allow incremental search
 set autoread " Auto-reload changed files
 set hidden " allow multiple buffers
-"set tabstop=2 " show existing tab with 2 spaces width
+set tabstop=2 " show existing tab with 2 spaces width
 set shiftwidth=2 " when indenting with '>', use 2 spaces width
 set noswapfile " Disable .swp files
 let &number=1 " Show current line number (using let syntax just because...)
@@ -63,6 +68,14 @@ nnoremap <leader><s-w> :set wrap!<cr>
 "set nofoldenable " Enables code folding
 "set foldmethod=syntax
 "set foldlevel=1
+
+" Elixir Template Syntax Support
+au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
+au BufRead,BufNewFile mix.lock set filetype=elixir
+
+" Javascript Template Syntax Support
+au BufRead,BufNewFile *.js.mustache set filetype=javascript
 
 """""""""""""""""
 """ Nerd Tree
@@ -116,6 +129,7 @@ noremap <leader><s-t> :tabf %:h/<CR>
 "noremap <leader><s-x> :split %:h/<CR>
 "noremap <leader><s-d> :E<CR>
 "noremap <leader><s-t> :tabf %:h/<CR>
+"
 
 """""""""""""""""
 """ Snippets
@@ -170,6 +184,51 @@ command! -bang -nargs=* Files
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   0) "Ag will show file names with a preview
 
+
+"""""""""""""""""
+""" Typescript
+"""""""""""""""""
+let g:typescript_indent_disable = 1
+
+"""""""""""""""""""""
+""" COC
+"""""""""""""""""""""
+
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-pyright', 'coc-elixir', '@yaegassy/coc-tailwindcss3']
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
+
+nnoremap <silent> D :call CocAction('doHover')<CR>
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+    silent call CocActionAsync('doHover')
+  endif
+endfunction
+
+"function! s:show_hover_doc()
+  "call timer_start(200, 'ShowDocIfNoDiagnostic')
+"endfunction
+
+"autocmd CursorHoldI * :call <SID>show_hover_doc()
+"autocmd CursorHold * :call <SID>show_hover_doc()
+
+" options for quick fixes
+nmap <leader>do <Plug>(coc-codeaction)
+" go to definition
+nmap <silent>gd <Plug>(coc-definition)
+" go to type definition
+nmap <silent>gy <Plug>(coc-type-definition)
+"nmap <leader>rn <Plug>(coc-rename)
+"
+
 """""""""""""""""
 """ Lightline
 """""""""""""""""
@@ -194,10 +253,10 @@ set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 "call cursor(l, c)
 "endfunction
 "autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
-let g:ale_linters = { 'elixir': ['dialyxir'] }
-let g:ale_sign_column_always = 1
+"let g:ale_linters = { 'elixir': ['dialyxir'] }
+"let g:ale_sign_column_always = 1
 "let g:ale_fix_on_save = 1
-let g:ale_fixers = { 'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop'] }
+"let g:ale_fixers = { 'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop'] }
 
 """"""""""""""""""
 """" Navigation
@@ -331,6 +390,12 @@ nnoremap <S-k> :s/ /\r/g<cr>
 """ Close tag
 """""""""""""""""""
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx"
+
+"""""""""""""""""""
+""" Mustache templates
+"""""""""""""""""""
+au BufReadPost *.mustache set syntax=html
+
 
 """""""""""""""
 """ Macros

@@ -1,0 +1,15 @@
+{
+	"coc.preferences.formatOnSaveFiletypes": [],
+	"diagnostic.refreshOnInsertMode": true,
+	"suggest.triggerCompletionWait": 100,
+	"tsserver.formatOnType": true,
+	"prettier.disableSuccessMessage": true,
+	"eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "tailwindCSS.jsLanguages": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+	"tailwindCSS.htmlLanguages": ["jsx", "tsx"],
+	"tailwindCSS.experimental.classRegex": [
+    "tw`([^`]*)", // tw`...`
+    "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
+    "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
+	]
+}

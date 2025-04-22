@@ -21,6 +21,9 @@ alias c=clear
 # Comprc
 alias comprc='cd ~/comprc && vim'
 
+# SSH
+alias ssh-proxy="ssh root@24.144.64.62"
+
 # TMUX
 alias e_tmux="vim $HOME/.tmux.conf"
 alias s_tmux="tmux source-file $HOME/.tmux.conf"
