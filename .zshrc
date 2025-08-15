@@ -94,12 +94,12 @@ export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 export PATH="$PATH:/usr/local/bin"
 
 # Java
-export ANDROID_HOME="/Users/tylerdoermann/Library/Android/sdk"
+export ANDROID_HOME="/Users/tdoermann/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 export PATH="$PATH:$JAVA_HOME/bin"
 
+export AWS_PROFILE="veras-aws"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="/usr/local/opt/llvm/bin:$PATH"

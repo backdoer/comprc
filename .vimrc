@@ -4,14 +4,14 @@ call plug#begin('~/.vim/plugged')
 "Plug 'scrooloose/nerdtree' " Directory structure
 "Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
 Plug 'ryanoasis/vim-devicons' " dev icons for vim
-Plug 'rbgrouleff/bclose.vim'
+"Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim' " Ranger
 Plug 'tpope/vim-vinegar' " Vinegar
 Plug 'itchyny/lightline.vim' " File info at bottom of vim
 Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
-Plug 'elixir-editors/vim-elixir' " Elixir support for vim
-Plug 'slashmili/alchemist.vim' " Elixir support for vim
+"Plug 'elixir-editors/vim-elixir' " Elixir support for vim
+"Plug 'slashmili/alchemist.vim' " Elixir support for vim
 Plug 'scrooloose/nerdcommenter' " Comment support
 Plug 'pangloss/vim-javascript' " Javascript support for vim
 Plug 'mxw/vim-jsx' " Jsx support for vim
@@ -23,20 +23,20 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder
 Plug 'junegunn/fzf.vim' " Vim plugin for fzf
 Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
 "Plug 'vim-ruby/vim-ruby' " ruby syntax
-Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
+"Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
 Plug 'tpope/vim-repeat' " Plugin to add support for repeating surround commands (and other plugins)
 Plug 'alvan/vim-closetag' " Auto close html tags
 "Plug 'mattn/emmet-vim' " Html expansion
 "Plug 'jiangmiao/auto-pairs' " self closing pairs
 "Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'backdoer/splitjoin.vim' " fork of splitjoin including elixir functions
-Plug 'kana/vim-submode' " submode
+"Plug 'kana/vim-submode' " submode
 "Plug 'w0rp/ale' " Async Linting
-Plug 'tpope/vim-abolish' " String case coercion
-Plug 'chiedo/vim-case-convert'
+"Plug 'tpope/vim-abolish' " String case coercion
+"Plug 'chiedo/vim-case-convert'
 Plug 'leafgarland/typescript-vim' " Typescript support
 Plug 'peitalin/vim-jsx-typescript' " Typescript support
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'commit': '7b9e1ef0a1399907c51d23b6080b94a5aba4a654'}
 Plug 'kana/vim-textobj-user' " Define custom text objects
 Plug 'andyl/vim-textobj-elixir' " Elixir text objects
 Plug 'styled-components/vim-styled-components'
@@ -197,20 +197,20 @@ let g:typescript_indent_disable = 1
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-pyright', 'coc-elixir', '@yaegassy/coc-tailwindcss3']
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
+	let g:coc_global_extensions += ['coc-prettier']
 endif
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
+	let g:coc_global_extensions += ['coc-eslint']
 endif
 
 nnoremap <silent> D :call CocAction('doHover')<CR>
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 function! ShowDocIfNoDiagnostic(timer_id)
-  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
-    silent call CocActionAsync('doHover')
-  endif
+	if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+		silent call CocActionAsync('doHover')
+	endif
 endfunction
 
 "function! s:show_hover_doc()
@@ -301,13 +301,13 @@ noremap <leader><s-e> :edit!<CR>
 """"""""""""""""""""
 """ Resizing Windows
 """"""""""""""""""""
-let g:submode_timeout=0
-call submode#enter_with('resize', 'n', '', '<c-w>+', '<c-w>+')
-"call submode#enter_with('resize', 'n', '', '<leader>_', '<leader>_')
-call submode#map('resize', 'n', '', 'l', ':vertical res +5<CR>')
-call submode#map('resize', 'n', '', 'h', ':vertical res -5<CR>')
-call submode#map('resize', 'n', '', 'k', ':res +5<CR>')
-call submode#map('resize', 'n', '', 'j', ':res -5<CR>')
+"let g:submode_timeout=0
+"call submode#enter_with('resize', 'n', '', '<c-w>+', '<c-w>+')
+""call submode#enter_with('resize', 'n', '', '<leader>_', '<leader>_')
+"call submode#map('resize', 'n', '', 'l', ':vertical res +5<CR>')
+"call submode#map('resize', 'n', '', 'h', ':vertical res -5<CR>')
+"call submode#map('resize', 'n', '', 'k', ':res +5<CR>')
+"call submode#map('resize', 'n', '', 'j', ':res -5<CR>')
 
 """""""""""""""""""""
 """ Quick File Edits
