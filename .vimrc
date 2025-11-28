@@ -1,17 +1,12 @@
 filetype off
 
 call plug#begin('~/.vim/plugged')
-"Plug 'scrooloose/nerdtree' " Directory structure
-"Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration with nerdtree
 Plug 'ryanoasis/vim-devicons' " dev icons for vim
-"Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim' " Ranger
 Plug 'tpope/vim-vinegar' " Vinegar
 Plug 'itchyny/lightline.vim' " File info at bottom of vim
 Plug 'SirVer/ultisnips' " Snippet Engine
 Plug 'honza/vim-snippets' " Group of snippets
-"Plug 'elixir-editors/vim-elixir' " Elixir support for vim
-"Plug 'slashmili/alchemist.vim' " Elixir support for vim
 Plug 'scrooloose/nerdcommenter' " Comment support
 Plug 'pangloss/vim-javascript' " Javascript support for vim
 Plug 'mxw/vim-jsx' " Jsx support for vim
@@ -22,26 +17,15 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim integration
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy finder for file names/content
 Plug 'junegunn/fzf.vim' " Vim plugin for fzf
 Plug 'christoomey/vim-tmux-navigator' " used for pane nav with tmux
-"Plug 'vim-ruby/vim-ruby' " ruby syntax
-"Plug 'vim-scripts/surround.vim' " Plugin to edit surrounding elements
 Plug 'tpope/vim-repeat' " Plugin to add support for repeating surround commands (and other plugins)
 Plug 'alvan/vim-closetag' " Auto close html tags
-"Plug 'mattn/emmet-vim' " Html expansion
-"Plug 'jiangmiao/auto-pairs' " self closing pairs
-"Plug 'AndrewRadev/splitjoin.vim' " one/multi line function switches
 Plug 'backdoer/splitjoin.vim' " fork of splitjoin including elixir functions
-"Plug 'kana/vim-submode' " submode
-"Plug 'w0rp/ale' " Async Linting
-"Plug 'tpope/vim-abolish' " String case coercion
-"Plug 'chiedo/vim-case-convert'
 Plug 'leafgarland/typescript-vim' " Typescript support
 Plug 'peitalin/vim-jsx-typescript' " Typescript support
 Plug 'neoclide/coc.nvim', {'commit': '7b9e1ef0a1399907c51d23b6080b94a5aba4a654'}
 Plug 'kana/vim-textobj-user' " Define custom text objects
 Plug 'andyl/vim-textobj-elixir' " Elixir text objects
 Plug 'styled-components/vim-styled-components'
-"Plug 'posva/vim-vue'
-"Plug 'posva/vim-vue-plugin'
 call plug#end()
 
 """"""""""""""""""
@@ -65,9 +49,6 @@ set ignorecase " ignore case in search
 set smartcase " honor case if capital present
 set wrap
 nnoremap <leader><s-w> :set wrap!<cr>
-"set nofoldenable " Enables code folding
-"set foldmethod=syntax
-"set foldlevel=1
 
 " Elixir Template Syntax Support
 au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
@@ -76,24 +57,6 @@ au BufRead,BufNewFile mix.lock set filetype=elixir
 
 " Javascript Template Syntax Support
 au BufRead,BufNewFile *.js.mustache set filetype=javascript
-
-"""""""""""""""""
-""" Nerd Tree
-"""""""""""""""""
-"let NERDTreeMapOpenSplit='<C-x>'
-"let NERDTreeMapOpenVSplit='<C-v>'
-"let NERDTreeMapOpenInTab='<C-t>'
-"let g:NERDTreeMapJumpPrevSibling="" " To allow tmux/vim navigation
-"let g:NERDTreeMapJumpNextSibling="" " To allow tmux/vim navigation
-"let NERDTreeShowHidden=1 " Display ignored files in NERDTree
-"autocmd bufenter * if (winnr("$") == 1
-      "\ && exists("b:NERDTree")
-      "\ && b:NERDTree.isTabTree())
-      "\ | q | endif " Automatically close vim if NERDTree is only buffer left
-"autocmd VimEnter * NERDTree " Automatically start NERDTree on open
-"let g:NERDTreeWinSize=40
-"map <leader>n :NERDTreeToggle<CR>
-"map <leader><s-n> :NERDTreeFind<CR>
 
 """"""""""""""""
 "" Ranger
@@ -104,8 +67,7 @@ let g:ranger_command_override = 'ranger --cmd="unmap a" --cmd="map R rename_appe
 let g:ranger_map_keys = 0
 noremap <leader>n :RangerWorkingDirectory<CR>
 noremap <leader><s-n> :RangerCurrentFile<CR>
-"noremap <leader>t :RangerWorkingDirectoryNewTab<CR>
-"noremap <leader><s-t> :RangerCurrentFileNewTab<CR>
+"noremap <leader>t :RangerWorkingDirectoryNewTab<CR> "noremap <leader><s-t> :RangerCurrentFileNewTab<CR>
 
 """"""""""""""""""""
 """ Netrw
@@ -121,15 +83,6 @@ noremap <leader>_ :split %:h/<CR>
 noremap <leader><s-b> :tabnew <CR>
 noremap <leader><s-d> :Explore<CR>
 noremap <leader><s-t> :tabf %:h/<CR>
-"noremap <leader>v :vsplit .<CR>
-"noremap <leader>d :e .<CR>
-"noremap <leader>x :split .<CR>
-"noremap <leader>t :tabf .<CR>
-"noremap <leader><s-v> :vsplit %:h/<CR>
-"noremap <leader><s-x> :split %:h/<CR>
-"noremap <leader><s-d> :E<CR>
-"noremap <leader><s-t> :tabf %:h/<CR>
-"
 
 """""""""""""""""
 """ Snippets
@@ -138,8 +91,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="tab"
 let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/my-snippets/UltiSnips']
-"let g:UltiSnipsListSnippets = "<c-r>"
-"let g:UltiSnipsExpandTrigger="<tab>"
 
 """""""""""""""""
 """ FZF
@@ -213,13 +164,6 @@ function! ShowDocIfNoDiagnostic(timer_id)
 	endif
 endfunction
 
-"function! s:show_hover_doc()
-  "call timer_start(200, 'ShowDocIfNoDiagnostic')
-"endfunction
-
-"autocmd CursorHoldI * :call <SID>show_hover_doc()
-"autocmd CursorHold * :call <SID>show_hover_doc()
-
 " options for quick fixes
 nmap <leader>do <Plug>(coc-codeaction)
 " go to definition
@@ -242,44 +186,23 @@ function! LightLineFilename()
 endfunction
 set laststatus=2 " always enable lightline even if nerdtree isn't toggled
 
-""""""""""""""""
-"" Linting
-""""""""""""""""
-"function! TrimWhiteSpace()
-"let l = line(".")
-"let c = col(".")
-"%s/\s\+$//e
-"%s/\r//ge
-"call cursor(l, c)
-"endfunction
-"autocmd BufWritePre * :call TrimWhiteSpace() " Trim trailing spaces on save
-"let g:ale_linters = { 'elixir': ['dialyxir'] }
-"let g:ale_sign_column_always = 1
-"let g:ale_fix_on_save = 1
-"let g:ale_fixers = { 'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop'] }
-
 """"""""""""""""""
 """" Navigation
 """"""""""""""""""
 " Horizontal
 noremap L $
 noremap H 0
+noremap T ^
 " Go through changelist. Also remember <C-o> & <C-i> for going through jumplist
 nnoremap <C-f> g,
 nnoremap <C-b> g;
 " Tabs
 nnoremap <C-n> gt
 nnoremap <C-p> gT
-"noremap <C-h> <C-w>h
-"noremap <C-j> <C-w>j
-"noremap <C-k> <C-w>k
-"noremap <C-l> <C-w>l
 
 """""""""""""""""""""""
 """ Search and Replace
 """""""""""""""""""""""
-" Search and replace word under cursor
-"nnoremap <Leader>r :%s/<C-r><C-w>//gc<left><left><left>
 " Search and replace
 nnoremap <Leader>r :%s///gc<left><left><left><left>
 " Search and replace word in clipboard
@@ -297,17 +220,6 @@ noremap <leader>q :q<CR>
 noremap <leader>w :w<CR>
 noremap <leader>e :edit!<CR>
 noremap <leader><s-e> :edit!<CR>
-
-""""""""""""""""""""
-""" Resizing Windows
-""""""""""""""""""""
-"let g:submode_timeout=0
-"call submode#enter_with('resize', 'n', '', '<c-w>+', '<c-w>+')
-""call submode#enter_with('resize', 'n', '', '<leader>_', '<leader>_')
-"call submode#map('resize', 'n', '', 'l', ':vertical res +5<CR>')
-"call submode#map('resize', 'n', '', 'h', ':vertical res -5<CR>')
-"call submode#map('resize', 'n', '', 'k', ':res +5<CR>')
-"call submode#map('resize', 'n', '', 'j', ':res -5<CR>')
 
 """""""""""""""""""""
 """ Quick File Edits
@@ -382,9 +294,7 @@ function SurroundWords(front, back)
   execute command
 endfunction
 
-"vnoremap <Leader>r :'<,'>s/\%Vfoo\%V/bar/g<left><left><left><left><left><left>
 nnoremap <S-k> :s/ /\r/g<cr>
-
 
 """""""""""""""""""
 """ Close tag
@@ -400,9 +310,6 @@ au BufReadPost *.mustache set syntax=html
 """""""""""""""
 """ Macros
 """"""""""""""""
-"let @[key]='[macro-hash]'
-" Commatize
-"let @c="Ea,\<Esc>W"
 let @r="12ddvEebhxjddveeeeebhxkJjH5ddddddkJHj"
 
 """"""""""""""""
@@ -419,9 +326,6 @@ onoremap h it
 """"""""""""""""""""
 """ Move Text Blocks
 """"""""""""""""""""
-" Normal mode
-"nnoremap <leader>j :m .+1<CR>==
-"nnoremap <leader>k :m .-2<CR>==
 
 "" Insert mode
 inoremap <C-j> <ESC>:m .+1<CR>==gi
