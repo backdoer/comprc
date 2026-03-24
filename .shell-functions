@@ -55,6 +55,10 @@ gmm(){
   git push --no-verify
 }
 
+gmr(){
+  gh pr view --json url -q .url | cat
+}
+
 # Rebease only YOUR commits onto master
 # git rebase --onto master reactions reaction-users
 
