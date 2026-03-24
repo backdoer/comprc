@@ -1,6 +1,9 @@
 # Source shared shell commands
 source ~/comprc/.shell-functions
 
+# Source shared worktree commands
+source ~/comprc/.wt-functions
+
 # Into
 echo_intro
 
@@ -100,6 +103,8 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/H
 export PATH="$PATH:$JAVA_HOME/bin"
 
 export AWS_PROFILE="veras-aws"
+
+export VANTA_ENV_FILE="/Users/tdoermann/.vanta_env"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

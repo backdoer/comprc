@@ -1,0 +1,179 @@
+  # === Git Worktree Utilities ===
+
+  wt() {
+    local cmd="${1:-help}"
+    shift 2>/dev/null || true
+
+    case "$cmd" in
+      create)  _wt_create "$@" ;;
+      remove|rm) _wt_remove "$@" ;;
+      init)    _wt_init "$@" ;;
+      list|ls) git worktree list ;;
+      go|cd)   _wt_go "$@" ;;
+      *)       _wt_help ;;
+    esac
+  }
+
+  _wt_base() {
+    local git_common repo_name base
+    git_common=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) || { echo "Not in a git repo" >&2; return 1; }
+    # git-common-dir returns <repo>/.git — go up one level for the repo name
+    repo_name=$(basename "${git_common%/.git}")
+    base="${HOME}/.worktrees/${repo_name}"
+    mkdir -p "$base"
+    echo "$base"
+  }
+
+  _wt_main() {
+    git worktree list | head -1 | awk '{print $1}'
+  }
+
+  # Interactive worktree picker (excludes main worktree)
+  # Sets _wt_pick_branch and _wt_pick_path on success
+  _wt_pick() {
+    local -a paths branches
+    local i=1 main
+    main=$(_wt_main)
+    while IFS= read -r line; do
+      local p=$(echo "$line" | awk '{print $1}')
+      [ "$p" = "$main" ] && continue
+      local b=$(echo "$line" | sed 's/.*\[\(.*\)\].*/\1/')
+      paths+=("$p")
+      branches+=("$b")
+      echo "  $i) $b  →  $p"
+      ((i++))
+    done < <(git worktree list | grep -v '(bare)')
+
+    [ ${#paths[@]} -eq 0 ] && { echo "No worktrees found." >&2; return 1; }
+
+    local choice
+    read -r "choice?Select (1-${#paths[@]}): "
+    [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le ${#paths[@]} ] || { echo "Invalid." >&2; return 1; }
+    _wt_pick_branch="${branches[$choice]}"
+    _wt_pick_path="${paths[$choice]}"
+  }
+
+  _wt_create() {
+    local branch="${1:?Usage: wt create <branch> [base-ref]}"
+    local base_ref="${2:-main}"
+    local dir_name="${branch//\//-}"
+    local base_dir wt_path
+    base_dir=$(_wt_base) || return 1
+    wt_path="${base_dir}/${dir_name}"
+
+    if [ -d "$wt_path" ]; then
+      echo "Worktree already exists at ${wt_path}"
+      read -r "confirm?Go to it? [Y/n] "
+      [[ "$confirm" =~ ^[Nn]$ ]] || _wt_go "$branch"
+      return 0
+    fi
+
+    if git show-ref --verify --quiet "refs/heads/${branch}" 2>/dev/null ||
+       git show-ref --verify --quiet "refs/remotes/origin/${branch}" 2>/dev/null; then
+      git worktree add "$wt_path" "$branch"
+    else
+      git worktree add -b "$branch" "$wt_path" "$base_ref"
+    fi
+    echo "Worktree created at ${wt_path}"
+
+    local init_script="${base_dir}/.wt-init"
+    if [ -n "$TMUX" ]; then
+      if [ -f "$init_script" ]; then
+        tmux new-window -n "$branch" -c "$wt_path" "bash \"$init_script\"; exec $SHELL"
+      else
+        tmux new-window -n "$branch" -c "$wt_path"
+      fi
+    else
+      cd "$wt_path"
+      [ -f "$init_script" ] && bash "$init_script"
+    fi
+  }
+
+  _wt_remove() {
+    local branch base_dir wt_path
+    local -a git_args=()
+
+    # Parse flags
+    local -a args=()
+    for arg in "$@"; do
+      case "$arg" in
+        --force|-f) git_args+=(--force) ;;
+        *) args+=("$arg") ;;
+      esac
+    done
+
+    base_dir=$(_wt_base) || return 1
+
+    if [ -n "${args[1]:-}" ]; then
+      branch="${args[1]}"
+    else
+      _wt_pick || return 1
+      branch="$_wt_pick_branch"
+    fi
+
+    wt_path="${base_dir}/${branch//\//-}"
+    [ -d "$wt_path" ] || { echo "No worktree for '${branch}'" >&2; return 1; }
+
+    # Guard against removing the main worktree
+    if [ "$wt_path" = "$(_wt_main)" ]; then
+      echo "Cannot remove the main worktree." >&2
+      return 1
+    fi
+
+    git worktree remove "$wt_path" ${git_args[@]+"${git_args[@]}"}
+    echo "Worktree removed."
+
+    if git show-ref --verify --quiet "refs/heads/${branch}" 2>/dev/null; then
+      read -r "confirm?Delete branch '${branch}'? [y/N] "
+      [[ "$confirm" =~ ^[Yy]$ ]] && git branch -D "$branch"
+    fi
+  }
+
+  _wt_init() {
+    local branch="${1:?Usage: wt init <branch>}"
+    local base_dir wt_path init_script
+    base_dir=$(_wt_base) || return 1
+    wt_path="${base_dir}/${branch//\//-}"
+
+    [ -d "$wt_path" ] || { echo "No worktree for '${branch}'" >&2; return 1; }
+
+    init_script="${base_dir}/.wt-init"
+    [ -f "$init_script" ] || { echo "No .wt-init found at ${init_script}" >&2; return 1; }
+
+    echo "Initializing '${branch}'..."
+    (cd "$wt_path" && bash "$init_script")
+    echo "Done."
+  }
+
+  _wt_go() {
+    local branch target base_dir
+
+    if [ -n "${1:-}" ]; then
+      branch="$1"
+      base_dir=$(_wt_base) || return 1
+      target="${base_dir}/${branch//\//-}"
+      [ -d "$target" ] || { echo "No worktree for '${branch}'" >&2; return 1; }
+    else
+      _wt_pick || return 1
+      branch="$_wt_pick_branch"
+      target="$_wt_pick_path"
+    fi
+
+    if [ -n "$TMUX" ]; then
+      tmux new-window -n "$branch" -c "$target"
+    else
+      cd "$target"
+    fi
+  }
+
+  _wt_help() {
+    cat <<'EOF'
+Usage: wt <command> [args]
+
+  create <branch> [base-ref]   Create worktree, open in tmux, run .wt-init (default base: main)
+  remove [branch] [--force]    Remove worktree (interactive picker if no branch)
+  init   <branch>              Run .wt-init script in worktree
+  list                         List all worktrees
+  go     [branch]              Open worktree in tmux window (interactive picker if no branch)
+EOF
+  }
