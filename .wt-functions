@@ -10,6 +10,7 @@
       init)    _wt_init "$@" ;;
       list|ls) git worktree list ;;
       go|cd)   _wt_go "$@" ;;
+      lin)     _wt_lin "$@" ;;
       *)       _wt_help ;;
     esac
   }
@@ -187,6 +188,26 @@
     fi
   }
 
+  _wt_lin() {
+    local branch ticket
+
+    if [[ -n "${1:-}" ]]; then
+      branch="$1"
+    else
+      read -r "branch?Branch name: "
+    fi
+    [[ -n "$branch" ]] || { echo "Branch name required." >&2; return 1; }
+
+    if [[ -n "${2:-}" ]]; then
+      ticket="$2"
+    else
+      read -r "ticket?Linear ticket: "
+    fi
+    [[ -n "$ticket" ]] || { echo "Ticket required." >&2; return 1; }
+
+    _wt_create "$branch" --run "clinear $ticket"
+  }
+
   _wt_help() {
     cat <<'EOF'
 Usage: wt <command> [args]
@@ -196,6 +217,7 @@ Usage: wt <command> [args]
   init   <branch>              Run .wt-init script in worktree
   list                         List all worktrees
   go     [branch]              Open worktree in tmux window (interactive picker if no branch)
+  lin    [branch] [ticket]     Create worktree and run clinear on a Linear ticket
 EOF
   }
 
