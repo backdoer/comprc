@@ -54,8 +54,27 @@
   }
 
   _wt_create() {
-    local branch="${1:?Usage: wt create <branch> [base-ref]}"
-    local base_ref="${2:-main}"
+    local branch="" base_ref="main" run_cmd=""
+
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        --run)
+          run_cmd="$2"
+          shift 2
+          ;;
+        *)
+          if [[ -z "$branch" ]]; then
+            branch="$1"
+          else
+            base_ref="$1"
+          fi
+          shift
+          ;;
+      esac
+    done
+
+    [[ -n "$branch" ]] || { echo "Usage: wt create <branch> [base-ref] [--run <cmd>]" >&2; return 1; }
+
     local dir_name="${branch//\//-}"
     local base_dir wt_path
     base_dir=$(_wt_base) || return 1
@@ -83,9 +102,11 @@
       else
         tmux new-window -n "$branch" -c "$wt_path"
       fi
+      [[ -n "$run_cmd" ]] && tmux send-keys -t "$branch" "$run_cmd" Enter
     else
       cd "$wt_path"
       [ -f "$init_script" ] && bash "$init_script"
+      [[ -n "$run_cmd" ]] && eval "$run_cmd"
     fi
   }
 
@@ -170,10 +191,15 @@
     cat <<'EOF'
 Usage: wt <command> [args]
 
-  create <branch> [base-ref]   Create worktree, open in tmux, run .wt-init (default base: main)
+  create <branch> [base-ref] [--run <cmd>]   Create worktree, open in tmux, run .wt-init, optionally run cmd
   remove [branch] [--force]    Remove worktree (interactive picker if no branch)
   init   <branch>              Run .wt-init script in worktree
   list                         List all worktrees
   go     [branch]              Open worktree in tmux window (interactive picker if no branch)
 EOF
+  }
+
+  clinear() {
+    local ticket="${1:?Usage: clinear <ticket>}"
+    claude --dangerously-skip-permissions "Get the linear ticket $ticket and implement it"
   }
