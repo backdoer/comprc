@@ -61,6 +61,14 @@ for file in $files; do
 done
 echo "Finished moving any existing dotfiles from ~ to $olddir"
 
+# Ghostty config symlink
+ghostty_dir="$HOME/Library/Application Support/com.mitchellh.ghostty"
+if [ -d "$ghostty_dir" ]; then
+  mv "$ghostty_dir/config.ghostty" $olddir 2>/dev/null
+  echo "Creating symlink for ghostty config."
+  ln -s $dir/ghostty/config.ghostty "$ghostty_dir/config.ghostty"
+fi
+
 # Install Plug for managing Vim plugins
 echo "Installing Plug"
 sudo curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

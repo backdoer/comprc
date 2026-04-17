@@ -1,0 +1,4 @@
+background = #000000
+foreground = #ffffff
+background-opacity = 1.0
+background-blur = false
