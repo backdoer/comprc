@@ -26,10 +26,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Theme
 export LSCOLORS='gxBxhxDxfxhxhxhxhxcxcx'
-PROMPT='\
-$FG[039]%~\
-$(git_prompt_info) \
-$FG[039]%(!.#.»)%{$reset_color%} '
+
+PROMPT=$'%{$FG[039]%}%~%{$reset_color%}$(git_prompt_info) %{$FG[039]%}%(!.#.»)%{$reset_color%} '
 
 eval my_gray='$FG[237]'
 eval my_orange='$FG[214]'
@@ -38,24 +36,6 @@ ZSH_THEME_GIT_PROMPT_PREFIX="$FG[255]($FG[255]"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
-
-# Chrome history search
-ch() {
-  local cols sep
-  cols=$(( COLUMNS / 3 ))
-  sep='{::}'
-
-  cp -f ~/Library/Application\ Support/Google/Chrome/Default/History /tmp/h
-
-  sqlite3 -separator $sep /tmp/h \
-    "select substr(title, 1, $cols), url
-     from urls order by last_visit_time desc" |
-  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-  fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs open
-}
-
-alias gg='googler'
-alias ggl='googler --lucky'
 
 # Ngrok
 export PATH="$PATH:/usr/local/bin"
@@ -66,3 +46,30 @@ export VANTA_ENV_FILE="$HOME/.vanta_env"
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Vi mode for zsh command line
+bindkey -v
+export KEYTIMEOUT=1
+
+function zle-keymap-select {
+	if [[ $KEYMAP == vicmd ]]; then
+		echo -ne "\e[2 q"   # Normal mode: block cursor
+	else
+		echo -ne "\e[1 q"   # Insert mode: beam cursor
+	fi
+}
+
+function zle-line-init {
+	echo -ne "\e[1 q"     # Start each prompt in insert mode with beam
+}
+
+bindkey -M vicmd 'H' vi-beginning-of-line   # H → 0
+bindkey -M vicmd 'L' vi-end-of-line         # L → $
+bindkey -M vicmd 'T' vi-first-non-blank     # T → ^
+
+function _vi-yank-clip { zle vi-yank; printf '%s' "$CUTBUFFER" | pbcopy; }
+zle -N _vi-yank-clip
+bindkey -M vicmd 'y' _vi-yank-clip
+
+zle -N zle-keymap-select
+zle -N zle-line-init

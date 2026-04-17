@@ -335,6 +335,19 @@ inoremap <C-k> <ESC>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+""""""""""""""""""
+"""" Cursor shape
+""""""""""""""""""
+let &t_SI = "\e[1 q"   " insert  → blinking block
+let &t_SR = "\e[4 q"   " replace → underline
+let &t_EI = "\e[2 q"   " normal  → block
+
+augroup CursorShape
+  autocmd!
+  autocmd VimEnter * silent !echo -ne "\e[1 q"
+  autocmd VimLeave * silent !echo -ne "\e[6 q"
+augroup END
+
 """""""""""""""""""""""
 """ Things to Remember
 """""""""""""""""""""""
