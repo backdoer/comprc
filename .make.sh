@@ -10,7 +10,7 @@
 
 dir=~/comprc                                # dotfiles directory
 olddir=~/comprc_old                         # old dotfiles backup directory
-files="bashrc zshrc vimrc vim tmux.conf alacritty.yml"    # list of files/folders to symlink in homedir
+files="bashrc zshrc vimrc vim tmux.conf alacritty.yml config/nvim"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -82,7 +82,7 @@ echo "Finished changing vim autoload permissions"
 
 # Install the rest of the plugins
 echo "Installing All Vim Plugins"
-sudo vim +PlugInstall +qall
+sudo nvim +PlugInstall +qall
 echo "Finished Installing All Vim Plugins"
 
  #Change permissions on autload file...already do this up above

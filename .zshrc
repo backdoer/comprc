@@ -49,6 +49,10 @@ export NVM_DIR="$HOME/.nvm"
 
 # Vi mode for zsh command line
 bindkey -v
+
+bindkey -M viins '^P' up-line-or-history
+bindkey -M viins '^N' down-line-or-history
+
 export KEYTIMEOUT=1
 
 function zle-keymap-select {
